@@ -1,0 +1,392 @@
+@import "src/styles/var";
+@import "src/styles/mixins";
+
+$animationStep1: 0.3s;
+$animationStep1Delay: $animationStep1;
+$animationStep2: 0.2s;
+$animationStep2Delay: $animationStep1Delay + $animationStep2;
+
+@keyframes burgerLine {
+  0% {
+    width: 0%;
+  }
+
+  99% {
+    background-color: $orangeDark;
+  }
+
+  100% {
+    width: 100%;
+    background-color: transparent;
+  }
+}
+
+.header {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @include desktop {
+    box-shadow: 0px 4px 4px -4px rgba(0, 0, 0, 0.15);
+  }
+
+  &__block {
+    @include container;
+    color: $black;
+    position: relative;
+    background-color: $white;
+    z-index: 2;
+  }
+
+  &__top {
+    height: 48px;
+    transition-delay: $animationStep2Delay;
+    transition-duration: $animationStep2;
+    transition-property: all;
+
+    &_animation {
+      margin-top: -48px;
+    }
+
+    @include desktop {
+      gap: 40px;
+      height: 55px;
+      border-bottom: 0.8px solid rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  &__main {
+    background-color: $orangeDark;
+    height: 60px;
+    position: relative;
+    transition: box-shadow $animationStep2;
+    transition-delay: $animationStep1Delay;
+    color: $white;
+
+    @include desktop {
+      background-color: $white;
+      color: $black;
+      height: 80px;
+    }
+
+    &_animation {
+      background-color: $white;
+      color: $black;
+      box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.25);
+
+      &::after {
+        display: block;
+        position: absolute;
+        top: 0;
+        right: 0;
+        content: "";
+        height: 1px;
+        background-color: $black;
+        animation: burgerLine $animationStep1 ease-in-out forwards;
+      }
+
+      &::before {
+        display: block;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        content: "";
+        height: 1px;
+        background-color: $black;
+        animation: burgerLine $animationStep1 ease-in-out forwards;
+      }
+    }
+  }
+
+  &__address {
+    font-size: 10px;
+    max-width: 137px;
+
+    @include desktop {
+      font-size: 12px;
+      max-width: unset;
+    }
+  }
+
+  &__phone {
+    font-size: 12px;
+    color: $black;
+    text-decoration: unset;
+  }
+
+  &__left {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+
+    @include desktop {
+      font-size: 16px;
+    }
+  }
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+    font-weight: 400;
+  }
+
+  &__right {
+    display: flex;
+    gap: 12px;
+  }
+
+  &__bottom {
+    height: 100vh;
+    position: fixed;
+    width: 100%;
+    z-index: -1;
+    margin-top: -130%;
+    transition-delay: $animationStep1Delay;
+    transition-duration: $animationStep1;
+    transition-property: all;
+
+    &_animation {
+      margin-top: 60px;
+    }
+  }
+
+  &__middle {
+    display: none;
+
+    @include desktop {
+      display: block;
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 13px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    @include desktop {
+      flex-direction: row;
+      gap: 44px;
+    }
+  }
+
+  &__item {
+    font-size: 14px;
+    width: 100%;
+    height: 57px;
+    border-bottom: 1px solid transparent;
+    box-sizing: border-box;
+
+    @include desktop {
+      height: unset;
+      text-wrap: nowrap;
+      padding: 10px 0;
+    }
+
+    a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-decoration: none;
+      color: $black;
+      width: 100%;
+      height: 100%;
+    }
+
+    &_active {
+      background-color: $orangeLight;
+
+      @include desktop {
+        background-color: unset;
+        border-bottom: 1px solid $black;
+      }
+
+      a {
+        color: $white;
+
+        @include desktop {
+          color: $black;
+        }
+      }
+    }
+  }
+}
+
+.logo {
+  &__image {
+    width: 40px;
+    height: 40px;
+
+    @include desktop {
+      width: 60px;
+      height: 60px;
+    }
+  }
+}
+
+.shopping-cart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  position: relative;
+  width: 24px;
+  height: 24px;
+  transition-delay: $animationStep1Delay;
+  transition: $animationStep2;
+
+  @include desktop {
+    border: 1px solid rgba(139, 139, 139, 1);
+    width: 171px;
+    height: 44px;
+    transition: border $animationStep1;
+
+    &:hover {
+      border-color: $orangeLight;
+    }
+  }
+
+  &__text {
+    font-size: 14px;
+  }
+
+  &__desktop {
+    display: none;
+    align-items: center;
+    gap: 10px;
+
+    @include desktop {
+      display: flex;
+    }
+  }
+
+  &_animation {
+    opacity: 0;
+    display: none;
+  }
+
+  &__count {
+    position: absolute;
+    top: 1.5px;
+    right: 3px;
+    font-size: 6px;
+
+    @include desktop {
+      display: block;
+      position: unset;
+      font-size: 14px;
+      margin-left: 8px;
+      background-color: rgb(255, 136, 70);
+      padding: 2px 6px;
+      color: $white;
+      border-radius: 50%;
+    }
+  }
+
+  &__image {
+    width: 24px;
+    height: 24px;
+
+    @include desktop {
+      display: none;
+    }
+  }
+}
+
+.burger {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+
+  @include desktop {
+    display: none;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    transition: 0.2s all;
+  }
+
+  &__line {
+    width: 18px;
+    height: 2px;
+    background-color: $white;
+    transition-delay: $animationStep1Delay;
+    transition: $animationStep1 all;
+  }
+
+  &_active {
+    .burger__content {
+      gap: 0;
+    }
+
+    .burger__line {
+      background-color: $black;
+
+      &:first-child {
+        transform: translateY(1px) rotate(45deg);
+      }
+
+      &:last-child {
+        transform: translateY(-1px) rotate(-45deg);
+      }
+
+      &:nth-child(2) {
+        display: none;
+      }
+    }
+  }
+}
+
+.feedback {
+  height: 55px;
+  @include container;
+
+  &_desktop {
+    display: none;
+    height: unset;
+    padding: 0;
+    width: unset;
+    gap: 30px;
+    margin-left: auto;
+
+    @include desktop {
+      display: flex;
+    }
+
+    .feedback__button {
+      width: unset;
+      height: unset;
+      flex: unset;
+    }
+  }
+
+  &__button {
+    font-size: 12px;
+    flex: 1;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    height: 100%;
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
