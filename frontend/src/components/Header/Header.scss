@@ -115,6 +115,14 @@ $animationStep2Delay: $animationStep1Delay + $animationStep2;
     text-decoration: unset;
   }
 
+  &__subtitle {
+    font-size: 10px;
+
+    @include desktop {
+      font-size: 12px;
+    }
+  }
+
   &__left {
     display: flex;
     justify-content: space-between;
@@ -141,14 +149,17 @@ $animationStep2Delay: $animationStep1Delay + $animationStep2;
   &__bottom {
     height: 100vh;
     position: fixed;
+    opacity: 0;
     width: 100%;
-    z-index: -1;
+    z-index: 0;
+    background-color: white;
     margin-top: -130%;
     transition-delay: $animationStep1Delay;
     transition-duration: $animationStep1;
     transition-property: all;
 
     &_animation {
+      opacity: 1;
       margin-top: 60px;
     }
   }

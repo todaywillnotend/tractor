@@ -4,6 +4,7 @@ import cn from "classnames";
 
 import "./Header.scss";
 import { navigationItems } from "../../const";
+import { tel } from "../../const/data";
 
 export const Header: React.FC = () => {
   const [isBurgerOpen, setIsBurgerOpen] = useState(false);
@@ -23,8 +24,8 @@ export const Header: React.FC = () => {
         <div className="header__address">
           г. Волжский, ул 6-ая Автодорога, д. 22, офис 10
         </div>
-        <a className="header__phone" href="tel:+78442459132">
-          +7 8442 45-91-32
+        <a className="header__phone" href={tel.href}>
+          {tel.text}
         </a>
         <div className="feedback feedback_desktop">
           <button className="feedback__button">Напишите нам</button>

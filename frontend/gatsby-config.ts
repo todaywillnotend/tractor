@@ -30,6 +30,4 @@ const config: GatsbyConfig = {
   ],
 };
 
-console.log(321123, __dirname);
-
 export default config;
