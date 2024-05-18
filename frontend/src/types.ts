@@ -1,4 +1,5 @@
 export type TItem = {
+  id: number;
   title: string;
   price: number;
   last_price?: number;
@@ -14,6 +15,7 @@ export type TItemResponse = {
 
 export type TResponse<T> = {
   data: {
+    id: number;
     attributes: T;
   }[];
   meta: {

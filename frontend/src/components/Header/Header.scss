@@ -291,11 +291,12 @@ $animationStep2Delay: $animationStep1Delay + $animationStep2;
     font-size: 6px;
 
     @include desktop {
+      min-width: 10px;
       display: block;
       position: unset;
       font-size: 14px;
       margin-left: 8px;
-      background-color: rgb(255, 136, 70);
+      background-color: $orangeLight;
       padding: 2px 6px;
       color: $white;
       border-radius: 50%;

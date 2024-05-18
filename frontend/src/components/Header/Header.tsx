@@ -3,12 +3,16 @@ import { Link } from "gatsby";
 import cn from "classnames";
 
 import "./Header.scss";
+
 import { navigationItems } from "../../const";
-import { tel } from "../../const/data";
+import { CART_LOCAL_STORAGE_KEY, tel } from "../../const/data";
+import { useLocalStorageData } from "../../hooks/useLocalStorageData";
+import { TItem } from "../../types";
 
 export const Header: React.FC = () => {
   const [isBurgerOpen, setIsBurgerOpen] = useState(false);
-  const [shoppingCartCount, setShoppingCartCount] = useState(2);
+
+  const [cart] = useLocalStorageData<TItem[]>(CART_LOCAL_STORAGE_KEY, []);
 
   const currentPagePath = useMemo(() => {
     return window.location.pathname;
@@ -79,7 +83,7 @@ export const Header: React.FC = () => {
               <span className="shopping-cart__text">Корзина</span>
             </div>
             <div className="shopping-cart__count">
-              {shoppingCartCount < 10 ? shoppingCartCount : "..."}
+              {cart.length < 10 ? cart.length : "..."}
             </div>
           </button>
           <button

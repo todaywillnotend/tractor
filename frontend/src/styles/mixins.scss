@@ -4,6 +4,18 @@
   }
 }
 
+@mixin tablet($breakpoint: 767px) {
+  @media (min-width: $breakpoint) {
+    @content;
+  }
+}
+
+@mixin mobile320($breakpoint: 359px) {
+  @media (max-width: $breakpoint) {
+    @content;
+  }
+}
+
 @mixin container() {
   padding: 0 20px;
   display: flex;

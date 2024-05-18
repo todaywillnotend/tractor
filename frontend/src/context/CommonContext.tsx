@@ -33,8 +33,9 @@ const CommonContextProvider = (props: PropsWithChildren) => {
 
       const formateData = (responseJson: TResponse<TItemResponse>): TItem[] => {
         return responseJson.data.map((item) => ({
-          ...item.attributes,
-          image: `${process.env.BACKEND_URL}${item.attributes.image.data.attributes.url}`,
+          ...(item?.attributes || {}),
+          id: item.id,
+          image: `${process.env.BACKEND_URL}${item?.attributes?.image?.data?.attributes?.url}`,
         }));
       };
 
