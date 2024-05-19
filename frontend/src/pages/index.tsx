@@ -7,6 +7,7 @@ import { Features } from "../components/Features/Features";
 import { Contacts } from "../components/Contacts/Contacts";
 import { PhotoGallery } from "../components/PhotoGallery/PhotoGallery";
 import { Form } from "../components/Form/Form";
+import { Footer } from "../components/Footer/Footer";
 
 const IndexPage: React.FC<PageProps> = () => {
   return (
@@ -18,6 +19,7 @@ const IndexPage: React.FC<PageProps> = () => {
       <Contacts />
       <PhotoGallery />
       <Form />
+      <Footer />
     </>
   );
 };

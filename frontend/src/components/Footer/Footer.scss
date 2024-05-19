@@ -1,0 +1,76 @@
+@import "src/styles/var";
+@import "src/styles/mixins";
+
+.footer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 80px;
+  background-color: $grayLight;
+
+  box-sizing: border-box;
+  padding: 26px 20px 30px 20px;
+
+  @include desktop {
+    margin-top: 174px;
+  }
+
+  &__container {
+    @include container;
+    align-items: flex-start;
+
+    @include desktop {
+      gap: 52%;
+    }
+  }
+
+  &__left {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    @include desktop {
+      gap: 40px;
+    }
+  }
+
+  &__address {
+    font-size: 10px;
+    max-width: 137px;
+
+    @include desktop {
+      font-size: 12px;
+      max-width: unset;
+    }
+  }
+
+  &__phone {
+    font-size: 12px;
+    color: $black;
+    text-decoration: unset;
+  }
+
+  &__subtitle {
+    font-size: 10px;
+
+    @include desktop {
+      font-size: 12px;
+    }
+  }
+
+  &__copyright {
+    margin-top: 32px;
+
+    font-size: 10px;
+
+    @include desktop {
+      font-size: 14px;
+      margin-top: 10px;
+    }
+  }
+
+  .feedback__button {
+    white-space: nowrap;
+  }
+}
