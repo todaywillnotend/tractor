@@ -51,7 +51,7 @@ const CommonContextProvider = (props: PropsWithChildren) => {
   useEffect(() => {
     (async () => {
       const responseCatalog = await fetch(
-        `${process.env.BACKEND_URL}/api/catalogs?populate=*` as string,
+        `${process.env.BACKEND_URL}/api/catalogs?populate=*&pagination[pageSize]=8` as string,
         {
           method: "GET",
           headers: {

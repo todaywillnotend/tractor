@@ -21,7 +21,7 @@ module.exports = {
     console.log("result", result);
 
     if (result) {
-      let text = `<h2>Новый заказ</h2><br>\n`;
+      let text = `<h2>Новый заказ</h2><br>\n\n`;
 
       if (result?.name) {
         text += `<b>Имя:</b> ${result?.name}<br>\n`;

@@ -6,6 +6,7 @@ import { Catalog } from "../components/Catalog/Catalog";
 import { Features } from "../components/Features/Features";
 import { Contacts } from "../components/Contacts/Contacts";
 import { PhotoGallery } from "../components/PhotoGallery/PhotoGallery";
+import { Form } from "../components/Form/Form";
 
 const IndexPage: React.FC<PageProps> = () => {
   return (
@@ -16,6 +17,7 @@ const IndexPage: React.FC<PageProps> = () => {
       <Features />
       <Contacts />
       <PhotoGallery />
+      <Form />
     </>
   );
 };
