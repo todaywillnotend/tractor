@@ -29,7 +29,7 @@ export const Header: React.FC = () => {
           г. Волжский, ул 6-ая Автодорога, д. 22, офис 10
         </div>
         <a className="header__phone" href={tel.href}>
-          {tel.text}
+          {tel.title}
         </a>
         <div className="feedback feedback_desktop">
           <button className="feedback__button">Напишите нам</button>

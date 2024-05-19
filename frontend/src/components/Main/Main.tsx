@@ -5,7 +5,7 @@ import "./Main.scss";
 
 export const Main: React.FC = () => {
   return (
-    <main className="main">
+    <section className="main">
       <div className="main__container">
         <div className="main__content">
           <h1 className="main__title">Трактор ХТЗ Т-150</h1>
@@ -30,6 +30,6 @@ export const Main: React.FC = () => {
           </div>
         </div>
       </div>
-    </main>
+    </section>
   );
 };

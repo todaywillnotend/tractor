@@ -36,25 +36,25 @@ export const Catalog: React.FC = () => {
             const idAddedElement = cart.includes(item.id);
 
             return (
-              <div className="catalog__item item">
-                <div className="item__image">
+              <div className="catalog__item catalog-item">
+                <div className="catalog-item__image">
                   <img src={item.image} alt={item.title} />
                 </div>
-                <div className="item__container">
-                  <p className="item__title">{item.title}</p>
-                  <div className="item__price">
+                <div className="catalog-item__container">
+                  <p className="catalog-item__title">{item.title}</p>
+                  <div className="catalog-item__price">
                     {item.last_price && (
-                      <div className="item__price_old">
+                      <div className="catalog-item__price_old">
                         {formatPrice(item.last_price)}
                       </div>
                     )}
-                    <div className="item__price_new">
+                    <div className="catalog-item__price_new">
                       {formatPrice(item.price)}
                     </div>
                   </div>
                   <button
-                    className={cn("item__button", {
-                      item__button_added: idAddedElement,
+                    className={cn("catalog-item__button", {
+                      "catalog-item__button_added": idAddedElement,
                     })}
                     onClick={() => addToCart(item.id)}
                   >

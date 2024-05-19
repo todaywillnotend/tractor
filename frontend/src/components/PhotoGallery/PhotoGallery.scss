@@ -1,0 +1,104 @@
+@import "src/styles/var";
+@import "src/styles/mixins";
+
+.photo-gallery {
+  display: flex;
+  justify-content: center;
+  margin-top: 97px;
+
+  @include desktop {
+    margin-top: 150px;
+  }
+
+  &__main {
+    border-radius: 4px;
+    background-color: $gray;
+
+    max-height: 250px;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+
+    @include desktop {
+      max-height: 650px;
+      max-width: 832px;
+      width: 100%;
+      height: 100%;
+    }
+
+    img {
+      max-width: 100%;
+      max-height: 100%;
+
+      @include desktop {
+        max-width: unset;
+        max-height: unset;
+      }
+    }
+  }
+
+  &__container {
+    @include container;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__content {
+    margin-top: 24px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    @include desktop {
+      align-items: center;
+      margin-top: 60px;
+      flex-direction: row;
+    }
+  }
+
+  &__items {
+    display: flex;
+    gap: 12px;
+
+    max-width: calc(100vw - 40px);
+    overflow: scroll;
+
+    @include desktop {
+      max-width: 590px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+  }
+
+  &__item {
+    border-radius: 4px;
+    background-color: $gray;
+
+    min-width: 80px;
+    width: 80px;
+    height: 80px;
+
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
+
+    @include desktop {
+      min-width: 100px;
+      width: 100px;
+      height: 100px;
+    }
+
+    &_main {
+      border: 2px solid $orangeDark;
+    }
+
+    img {
+      width: 100%;
+      max-width: 100%;
+      max-height: 100%;
+    }
+  }
+}

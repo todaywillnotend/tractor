@@ -899,6 +899,37 @@ export interface ApiOrderOrder extends Schema.CollectionType {
   };
 }
 
+export interface ApiPhotoPhoto extends Schema.SingleType {
+  collectionName: 'photos';
+  info: {
+    singularName: 'photo';
+    pluralName: 'photos';
+    displayName: 'Photos';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    image: Attribute.Media;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::photo.photo',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::photo.photo',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -920,6 +951,7 @@ declare module '@strapi/types' {
       'plugin::telegram-bot-strapi.telegram': PluginTelegramBotStrapiTelegram;
       'api::catalog.catalog': ApiCatalogCatalog;
       'api::order.order': ApiOrderOrder;
+      'api::photo.photo': ApiPhotoPhoto;
     }
   }
 }
