@@ -151,7 +151,7 @@ $animationStep2Delay: $animationStep1Delay + $animationStep2;
     position: fixed;
     opacity: 0;
     width: 100%;
-    z-index: 0;
+    z-index: 5;
     background-color: white;
     margin-top: -130%;
     transition-delay: $animationStep1Delay;
