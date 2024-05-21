@@ -26,4 +26,30 @@ const IndexPage: React.FC<PageProps> = () => {
 
 export default IndexPage;
 
-export const Head: HeadFC = () => <title>Главная</title>;
+export const Head: HeadFC = () => (
+  <>
+    <title>T-150 - продажа сельхозтехники.</title>
+    <meta
+      name="description"
+      content="Интернет-магазин по продаже сельхозтехники и различного сельскохозяйственного оборудования. У нас Вы можете купить сельхозтехнику: трактора, бульдозеры и запчасти к ним, кормораздатчики, зерносушилки."
+    />
+    <meta
+      name="keywords"
+      content="купить сельхозтехнику, продажа сельхозтехники, сельскохозяйственная техника, магазин сельхозтехники, t-150, трактор, бульдозер, кормораздатчик, зерносушилка"
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content='Интернет-магазин "T-150" - продажа сельхозтехники.'
+    />
+    <meta
+      property="og:image"
+      content={`${process.env.FRONTEND_URL}/tractor.png`}
+    />
+    <meta property="og:url" content={process.env.FRONTEND_URL}></meta>
+    <meta
+      property="og:description"
+      content="Интернет-магазин по продаже сельхозтехники и различного сельскохозяйственного оборудования. У нас Вы можете купить сельхозтехнику: трактора, бульдозер"
+    ></meta>
+  </>
+);

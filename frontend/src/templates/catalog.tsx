@@ -21,13 +21,17 @@ const CatalogPage: React.FC<PageProps> = ({
 export default CatalogPage;
 
 export const Head: HeadFC = ({
-  pageContext,
+  pageContext: { keywords },
 }: {
-  pageContext: { tags?: string };
+  pageContext: { keywords?: string };
 }) => {
   return (
     <>
-      <meta name="description" content={pageContext.tags} />
+      <meta
+        name="description"
+        content={`Продажа тракторов и запчастей к ним. Каталог товараров: ${keywords}. Цены от производителя, в наличии или под заказ 21 день. Гарантии. Доставка во все регионы РФ и СНГ.`}
+      />
+      <meta name="keywords" content={keywords} />
       <title>Каталог</title>
     </>
   );

@@ -32,14 +32,13 @@ const createPages: GatsbyNode["createPages"] = async ({ actions, graphql }) => {
     ? formatCatalogData(responseCatalogJson)
     : [];
 
-  const tags = catalogData.map((item) => item.title).join(",");
+  const keywords = catalogData.map((item) => item.title).join(", ");
 
   createPage({
     path: "/catalog",
-    // component: resolve(__dirname, "./src/templates/catalog.tsx"),
     component: resolve("src/templates/catalog.tsx"),
     context: {
-      tags,
+      keywords,
     },
   });
 };
