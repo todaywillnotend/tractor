@@ -62,7 +62,12 @@ export const Header: React.FC = () => {
           header__main_animation: isBurgerOpen,
         })}
       >
-        <div className="header__left">
+        <Link
+          to="/"
+          className={cn("header__left", {
+            header__left_animation: isBurgerOpen,
+          })}
+        >
           <div className="header__logo logo">
             <div className="logo__image_wrapper">
               <img src="/logo.png" alt="" className="logo__image" />
@@ -72,7 +77,7 @@ export const Header: React.FC = () => {
             <span className="header__title">T-150</span>
             <span className="header__subtitle">Ремонт техники</span>
           </div>
-        </div>
+        </Link>
         <div className="header__middle">
           <ul className="header__list">
             {Object.values(navigationItems).map((item) => (
@@ -89,7 +94,8 @@ export const Header: React.FC = () => {
           </ul>
         </div>
         <div className="header__right">
-          <button
+          <Link
+            to="/cart"
             className={cn("header__shopping-cart shopping-cart", {
               "shopping-cart_animation": isBurgerOpen,
             })}
@@ -106,7 +112,7 @@ export const Header: React.FC = () => {
             <div className="shopping-cart__count">
               {cart.length < 10 ? cart.length : "..."}
             </div>
-          </button>
+          </Link>
           <button
             onClick={() => {
               setIsBurgerOpen((prev) => {

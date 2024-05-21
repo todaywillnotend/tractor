@@ -130,8 +130,17 @@ $animationStep2Delay: $animationStep1Delay + $animationStep2;
     gap: 8px;
     font-size: 12px;
 
+    text-transform: unset;
+    text-decoration: unset;
+    color: $white;
+
     @include desktop {
       font-size: 16px;
+      color: $black;
+    }
+
+    &_animation {
+      color: $black;
     }
   }
 
@@ -253,6 +262,9 @@ $animationStep2Delay: $animationStep1Delay + $animationStep2;
   height: 24px;
   transition-delay: $animationStep1Delay;
   transition: $animationStep2;
+  text-transform: unset;
+  text-decoration: unset;
+  color: $black;
 
   @include desktop {
     border: 1px solid rgba(139, 139, 139, 1);
@@ -292,7 +304,8 @@ $animationStep2Delay: $animationStep1Delay + $animationStep2;
 
     @include desktop {
       min-width: 10px;
-      display: block;
+      display: flex;
+      justify-content: center;
       position: unset;
       font-size: 14px;
       margin-left: 8px;

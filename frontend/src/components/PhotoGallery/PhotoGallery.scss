@@ -22,8 +22,7 @@
 
     @include desktop {
       max-height: 650px;
-      max-width: 832px;
-      width: 100%;
+      width: 832px;
       height: 100%;
     }
 
@@ -32,6 +31,7 @@
       max-height: 100%;
 
       @include desktop {
+        height: 100%;
         max-width: unset;
         max-height: unset;
       }

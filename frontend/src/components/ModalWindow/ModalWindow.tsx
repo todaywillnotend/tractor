@@ -12,7 +12,7 @@ interface IModalWindow {
 }
 
 export const ModalWindow: React.FC<IModalWindow & PropsWithChildren> = ({
-  isModalOpen = false,
+  isModalOpen,
   setIsModalOpen,
   renderButton,
   className,
@@ -20,13 +20,27 @@ export const ModalWindow: React.FC<IModalWindow & PropsWithChildren> = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
+  useEffect(() => {
+    if (isModalOpen !== undefined) {
+      if (isModalOpen) {
+        document.body.style.overflow = "hidden";
+      } else {
+        document.body.style.overflow = "unset";
+      }
+    } else {
+      if (isOpen) {
+        document.body.style.overflow = "hidden";
+      } else {
+        document.body.style.overflow = "unset";
+      }
+    }
+  }, [isOpen, isModalOpen]);
+
   const openModal = () => {
-    document.body.style.overflow = "hidden";
     setIsOpen(true);
     setIsModalOpen?.(true);
   };
   const closeModal = () => {
-    document.body.style.overflow = "unset";
     setIsOpen(false);
     setIsModalOpen?.(false);
   };

@@ -8,7 +8,6 @@ const CartPage: React.FC<PageProps> = () => {
   return (
     <main className="mainWrapper">
       <Header />
-      <Catalog />
       <div className="footerWrapper">
         <Footer />
       </div>

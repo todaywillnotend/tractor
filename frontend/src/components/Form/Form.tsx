@@ -35,9 +35,12 @@ export const Form: React.FC<IForm> = ({
     formData.phone.length >= 10 && formData.phone.length < 13
   );
   const [isSuccess, setIsSuccess] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+
+    setIsLoading(true);
 
     if (!formData.phone) return;
 
@@ -76,6 +79,8 @@ export const Form: React.FC<IForm> = ({
       setIsSuccess(isOk);
     } catch (error) {
       alert("Произошла какая то ошибка");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -171,7 +176,7 @@ export const Form: React.FC<IForm> = ({
                     className="form__button"
                     disabled={!isButtonEnabled}
                   >
-                    Отправить
+                    {isLoading ? "Загрузка..." : "Отправить"}
                   </button>
                 </div>
               </form>
