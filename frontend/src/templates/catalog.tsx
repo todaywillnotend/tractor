@@ -4,11 +4,7 @@ import { Header } from "../components/Header/Header";
 import { Catalog } from "../components/Catalog/Catalog";
 import { Footer } from "../components/Footer/Footer";
 
-const CatalogPage: React.FC<PageProps> = ({
-  pageContext: { tags },
-}: {
-  pageContext: { tags?: string };
-}) => {
+const CatalogPage: React.FC<PageProps> = () => {
   return (
     <main>
       <Header />

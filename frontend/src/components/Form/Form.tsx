@@ -73,12 +73,6 @@ export const Form: React.FC<IForm> = ({
       const isOk =
         "data" in responseFormJson ? Boolean(responseFormJson?.data) : false;
 
-      if (isOk) {
-        setTimeout(() => {
-          onCloseClick?.();
-        }, 3500);
-      }
-
       setIsSuccess(isOk);
     } catch (error) {
       alert("Произошла какая то ошибка");
@@ -89,7 +83,6 @@ export const Form: React.FC<IForm> = ({
     <section className="form">
       <div className="form__container">
         <div className="form__content">
-          <h3 className="form__title">{title || "Заявка"}</h3>
           {isSuccess ? (
             <div className="form__success">
               <img src="/icon-success.svg" alt="" />
@@ -98,6 +91,7 @@ export const Form: React.FC<IForm> = ({
             </div>
           ) : (
             <>
+              <h3 className="form__title">{title || "Заявка"}</h3>
               <p className="form__subtitle">
                 {subtitle ||
                   "Заполните форму и наш менеджер свяжется с Вами в ближайшее рабочее время."}

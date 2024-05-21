@@ -11,7 +11,7 @@ import { Footer } from "../components/Footer/Footer";
 
 const IndexPage: React.FC<PageProps> = () => {
   return (
-    <main>
+    <main className="mainWrapper">
       <Header />
       <Main />
       <Catalog />
@@ -19,7 +19,9 @@ const IndexPage: React.FC<PageProps> = () => {
       <Contacts />
       <PhotoGallery />
       <Form />
-      <Footer />
+      <div className="footerWrapper">
+        <Footer />
+      </div>
     </main>
   );
 };

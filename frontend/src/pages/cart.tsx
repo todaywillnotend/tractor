@@ -6,10 +6,12 @@ import { Footer } from "../components/Footer/Footer";
 
 const CartPage: React.FC<PageProps> = () => {
   return (
-    <main>
+    <main className="mainWrapper">
       <Header />
       <Catalog />
-      <Footer />
+      <div className="footerWrapper">
+        <Footer />
+      </div>
     </main>
   );
 };

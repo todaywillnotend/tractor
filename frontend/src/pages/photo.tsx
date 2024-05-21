@@ -6,10 +6,12 @@ import { Footer } from "../components/Footer/Footer";
 
 const PhotoPage: React.FC<PageProps> = () => {
   return (
-    <main>
+    <main className="mainWrapper">
       <Header />
       <PhotoGallery />
-      <Footer />
+      <div className="footerWrapper">
+        <Footer />
+      </div>
     </main>
   );
 };
