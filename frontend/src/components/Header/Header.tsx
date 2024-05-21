@@ -8,6 +8,7 @@ import { navigationItems } from "../../const";
 import { CART_LOCAL_STORAGE_KEY, tel } from "../../const/data";
 import { useLocalStorageData } from "../../hooks/useLocalStorageData";
 import { TItem } from "../../types";
+import { FeedbackPopup } from "../FeedbackPopup/FeedbackPopup";
 
 export const Header: React.FC = () => {
   const [isBurgerOpen, setIsBurgerOpen] = useState(false);
@@ -15,7 +16,9 @@ export const Header: React.FC = () => {
   const [cart] = useLocalStorageData<TItem[]>(CART_LOCAL_STORAGE_KEY, []);
 
   const currentPagePath = useMemo(() => {
-    return window.location.pathname;
+    if (typeof window !== "undefined") {
+      return window?.location?.pathname;
+    }
   }, []);
 
   return (
@@ -32,8 +35,26 @@ export const Header: React.FC = () => {
           {tel.title}
         </a>
         <div className="feedback feedback_desktop">
-          <button className="feedback__button">Напишите нам</button>
-          <button className="feedback__button">Обратный звонок</button>
+          <FeedbackPopup
+            title="Напишите нам"
+            subtitle=" "
+            className="feedback__popup"
+            renderButton={({ openModal }) => (
+              <button className="feedback__button" onClick={() => openModal()}>
+                Напишите нам
+              </button>
+            )}
+          />
+          <FeedbackPopup
+            title="Обратный звонок"
+            subtitle=" "
+            withEmail={false}
+            renderButton={({ openModal }) => (
+              <button className="feedback__button" onClick={() => openModal()}>
+                Обратный звонок
+              </button>
+            )}
+          />
         </div>
       </div>
       <div
@@ -87,14 +108,15 @@ export const Header: React.FC = () => {
             </div>
           </button>
           <button
-            onClick={() =>
+            onClick={() => {
               setIsBurgerOpen((prev) => {
                 prev
-                  ? (document.documentElement.style.overflow = "unset")
-                  : (document.documentElement.style.overflow = "hidden");
+                  ? (document.body.style.overflow = "unset")
+                  : (document.body.style.overflow = "hidden");
+
                 return !prev;
-              })
-            }
+              });
+            }}
             className={cn("header__burger burger", {
               burger_active: isBurgerOpen,
             })}
@@ -113,8 +135,27 @@ export const Header: React.FC = () => {
         })}
       >
         <div className="feedback">
-          <button className="feedback__button">Напишите нам</button>
-          <button className="feedback__button">Обратный звонок</button>
+          <FeedbackPopup
+            title="Напишите нам"
+            subtitle=" "
+            className="feedback__popup"
+            renderButton={({ openModal }) => (
+              <button className="feedback__button" onClick={() => openModal()}>
+                Напишите нам
+              </button>
+            )}
+          />
+          <FeedbackPopup
+            title="Обратный звонок"
+            subtitle=" "
+            withEmail={false}
+            className="feedback__popup"
+            renderButton={({ openModal }) => (
+              <button className="feedback__button" onClick={() => openModal()}>
+                Обратный звонок
+              </button>
+            )}
+          />
         </div>
         <ul className="header__list">
           {Object.values(navigationItems).map((item) => (
@@ -125,7 +166,12 @@ export const Header: React.FC = () => {
                   currentPagePath === item.href + "/",
               })}
             >
-              <Link to={item.href}>{item.text}</Link>
+              <Link
+                to={item.href}
+                onClick={() => (document.body.style.overflow = "unset")}
+              >
+                {item.text}
+              </Link>
             </li>
           ))}
         </ul>

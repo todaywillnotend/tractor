@@ -35,6 +35,10 @@ module.exports = {
         text += `<b>Почта:</b> ${result?.email}<br>\n`;
       }
 
+      if (result?.message) {
+        text += `<b>Сообщение:</b> ${result?.message}<br>\n`;
+      }
+
       if (result?.createdAt) {
         text += `<b>Дата и время:</b> ${formatDateTime(
           result?.createdAt

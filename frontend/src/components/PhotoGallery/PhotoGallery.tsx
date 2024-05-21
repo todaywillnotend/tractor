@@ -15,7 +15,7 @@ export const PhotoGallery: React.FC = () => {
     }
   }, [photos]);
 
-  const [mainImage, setMainImage] = useState<TPhoto>(photos[0]);
+  const [mainImage, setMainImage] = useState<TPhoto>();
 
   return (
     <section className="photo-gallery">
@@ -26,7 +26,7 @@ export const PhotoGallery: React.FC = () => {
             <img src={mainImage?.src} alt="" />
           </div>
           <div className="photo-gallery__items">
-            {photos.map((item) => {
+            {(photos || []).map((item) => {
               const isMainImage = item.id === mainImage?.id;
 
               return (

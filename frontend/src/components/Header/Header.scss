@@ -36,7 +36,7 @@ $animationStep2Delay: $animationStep1Delay + $animationStep2;
     color: $black;
     position: relative;
     background-color: $white;
-    z-index: 2;
+    z-index: 6;
   }
 
   &__top {
@@ -389,14 +389,19 @@ $animationStep2Delay: $animationStep1Delay + $animationStep2;
     }
   }
 
+  &__popup {
+    flex: 1;
+    height: 100%;
+    width: 50%;
+  }
+
   &__button {
     font-size: 12px;
-    flex: 1;
     border: none;
     background-color: transparent;
     cursor: pointer;
     height: 100%;
-    width: 50%;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;

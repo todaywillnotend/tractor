@@ -9,3 +9,8 @@ body {
   font-weight: 400;
   font-style: normal;
 }
+
+.ReactModalPortal {
+  position: relative;
+  z-index: 10;
+}

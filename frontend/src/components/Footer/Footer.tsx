@@ -1,6 +1,7 @@
 import React from "react";
 
 import { tel } from "../../const/data";
+import { FeedbackPopup } from "../FeedbackPopup/FeedbackPopup";
 
 import "./Footer.scss";
 
@@ -22,8 +23,32 @@ export const Footer: React.FC = () => {
         </div>
         <div className="footer__tight">
           <div className="feedback feedback_desktop">
-            <button className="feedback__button">Напишите нам</button>
-            <button className="feedback__button">Обратный звонок</button>
+            <FeedbackPopup
+              title="Напишите нам"
+              subtitle=" "
+              className="feedback__popup"
+              renderButton={({ openModal }) => (
+                <button
+                  className="feedback__button"
+                  onClick={() => openModal()}
+                >
+                  Напишите нам
+                </button>
+              )}
+            />
+            <FeedbackPopup
+              title="Обратный звонок"
+              subtitle=" "
+              withEmail={false}
+              renderButton={({ openModal }) => (
+                <button
+                  className="feedback__button"
+                  onClick={() => openModal()}
+                >
+                  Обратный звонок
+                </button>
+              )}
+            />
           </div>
         </div>
       </div>

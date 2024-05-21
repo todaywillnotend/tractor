@@ -32,7 +32,7 @@ export const Catalog: React.FC = () => {
       <div className="catalog__container">
         <Title text="каталог" />
         <div className="catalog__items">
-          {catalog.map((item) => {
+          {(catalog || []).map((item) => {
             const idAddedElement = cart.includes(item.id);
 
             return (

@@ -881,6 +881,7 @@ export interface ApiOrderOrder extends Schema.CollectionType {
         minLength: 9;
       }>;
     email: Attribute.Email;
+    message: Attribute.Text;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

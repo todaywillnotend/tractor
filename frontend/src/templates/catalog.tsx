@@ -4,7 +4,11 @@ import { Header } from "../components/Header/Header";
 import { Catalog } from "../components/Catalog/Catalog";
 import { Footer } from "../components/Footer/Footer";
 
-const CatalogPage: React.FC<PageProps> = () => {
+const CatalogPage: React.FC<PageProps> = ({
+  pageContext: { tags },
+}: {
+  pageContext: { tags?: string };
+}) => {
   return (
     <main>
       <Header />
@@ -16,4 +20,15 @@ const CatalogPage: React.FC<PageProps> = () => {
 
 export default CatalogPage;
 
-export const Head: HeadFC = () => <title>Каталог</title>;
+export const Head: HeadFC = ({
+  pageContext,
+}: {
+  pageContext: { tags?: string };
+}) => {
+  return (
+    <>
+      <meta name="description" content={pageContext.tags} />
+      <title>Каталог</title>
+    </>
+  );
+};
