@@ -7,6 +7,7 @@ type TFormData = {
   email?: string;
   phone: string;
   message?: string;
+  cart?: number[];
 };
 
 interface IForm {
@@ -15,6 +16,8 @@ interface IForm {
   withMessage?: boolean;
   withEmail?: boolean;
   onCloseClick?: () => void;
+  onSuccess?: () => void;
+  cart?: number[];
 }
 
 export const Form: React.FC<IForm> = ({
@@ -22,13 +25,16 @@ export const Form: React.FC<IForm> = ({
   subtitle,
   withMessage = false,
   withEmail = true,
+  onSuccess,
   onCloseClick,
+  cart = [],
 }) => {
   const [formData, setFormData] = useState<TFormData>({
     name: "",
     email: "",
     phone: "",
     message: "",
+    cart,
   });
 
   const isButtonEnabled = Boolean(
@@ -60,6 +66,10 @@ export const Form: React.FC<IForm> = ({
       formattedFormData.message = formData.message;
     }
 
+    if (cart.length) {
+      formattedFormData.cart = formData.cart;
+    }
+
     try {
       const responseForm = await fetch(
         `${process.env.BACKEND_URL}/api/orders` as string,
@@ -77,6 +87,7 @@ export const Form: React.FC<IForm> = ({
         "data" in responseFormJson ? Boolean(responseFormJson?.data) : false;
 
       setIsSuccess(isOk);
+      onSuccess?.();
     } catch (error) {
       alert("Произошла какая то ошибка");
     } finally {
@@ -96,14 +107,18 @@ export const Form: React.FC<IForm> = ({
             </div>
           ) : (
             <>
-              <h3 className="form__title">{title || "Заявка"}</h3>
+              <h3 className="form__title">
+                {title !== undefined ? title : "Заявка"}
+              </h3>
               <p className="form__subtitle">
-                {subtitle ||
-                  "Заполните форму и наш менеджер свяжется с Вами в ближайшее рабочее время."}
+                {subtitle !== undefined
+                  ? subtitle
+                  : "Заполните форму и наш менеджер свяжется с Вами в ближайшее рабочее время."}
               </p>
               <div className="form__subtitle_desktop">
-                {subtitle ||
-                  `Удобный способ связаться с нами это телефон, но если Вы не
+                {subtitle !== undefined
+                  ? subtitle
+                  : `Удобный способ связаться с нами это телефон, но если Вы не
                 дозвонились или сейчас не рабочее время, то после заполнения
                 формы, наш менеджер свяжется с Вами в ближайшее рабочее время.`}
               </div>

@@ -17,45 +17,70 @@ function formatDateTime(dateStr: string): string {
 }
 
 module.exports = {
-  afterCreate: async ({ result }) => {
-    console.log("result", result);
+  afterCreate: async ({ _result, params }) => {
+    const data = params.data;
 
-    if (result) {
+    if (data) {
       let text = `<h2>Новый заказ</h2><br>\n\n`;
 
-      if (result?.name) {
-        text += `<b>Имя:</b> ${result?.name}<br>\n`;
+      if (data?.name) {
+        text += `<b>Имя:</b> ${data?.name}<br>\n`;
       }
 
-      if (result?.phone) {
-        text += `<b>Номер телефона:</b> ${result?.phone}<br>\n`;
+      if (data?.phone) {
+        text += `<b>Номер телефона:</b> ${data?.phone}<br>\n`;
       }
 
-      if (result?.email) {
-        text += `<b>Почта:</b> ${result?.email}<br>\n`;
+      if (data?.email) {
+        text += `<b>Почта:</b> ${data?.email}<br>\n`;
       }
 
-      if (result?.message) {
-        text += `<b>Сообщение:</b> ${result?.message}<br>\n`;
+      if (data?.message) {
+        text += `<b>Сообщение:</b> ${data?.message}<br>\n`;
       }
 
-      if (result?.createdAt) {
+      if (data?.createdAt) {
         text += `<b>Дата и время:</b> ${formatDateTime(
-          result?.createdAt
-        )}<br>\n`;
+          data?.createdAt
+        )}<br>\n\n`;
+      }
+
+      if (data?.cart && data?.cart.length) {
+        const cartItemsIds = data.cart || [];
+
+        if (cartItemsIds.length) {
+          text += `<b>Корзина: </b><br>\n`;
+
+          const cartItems = await Promise.all(
+            cartItemsIds.map((itemId) =>
+              strapi.db.query("api::catalog.catalog").findOne({
+                select: ["title"],
+                where: { id: itemId },
+              })
+            )
+          );
+
+          cartItems.forEach(async (item, index) => {
+            if (item?.title) {
+              text += `${index + 1}) ${item?.title}<br>\n`;
+            }
+          });
+        }
       }
 
       if (!text) return;
 
       try {
+        console.log("Отправка письма");
         await strapi.plugins["email"].services.email.send({
           from: "onboarding@resend.dev",
-          to: "todaywillnotend@gmail.com",
+          to: process.env.RESEND_EMAIL,
           subject: "Новый заказ",
           html: text,
           text: text,
         });
 
+        console.log("Отправка сообщения в тг");
         await fetch(
           `${process.env.BACKEND_URL}/telegram-bot-strapi/send-message`,
           {

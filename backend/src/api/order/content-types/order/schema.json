@@ -25,6 +25,11 @@
     },
     "message": {
       "type": "text"
+    },
+    "cart": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::catalog.catalog"
     }
   }
 }

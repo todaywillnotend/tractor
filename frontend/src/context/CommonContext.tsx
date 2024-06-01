@@ -7,88 +7,57 @@ import {
   TResponseCollection,
   TResponseSingle,
 } from "../types";
-
-const formatCatalogData = (
-  responseJson: TResponseCollection<TItemResponse>
-): TItem[] => {
-  return responseJson.data.map((item) => ({
-    ...(item?.attributes || {}),
-    id: item.id,
-    image: `${process.env.BACKEND_URL}${item?.attributes?.image?.data?.attributes?.url}`,
-  }));
-};
-
-const formatPhotosData = (
-  responseJson: TResponseSingle<TPhotosResponse>
-): TPhoto[] => {
-  return responseJson?.data?.attributes.image.data.map((item) => ({
-    id: item.id,
-    src: process.env.BACKEND_URL + item.attributes.url,
-    thumbnailSrc:
-      process.env.BACKEND_URL + item?.attributes?.formats?.thumbnail?.url,
-  }));
-};
+import { getCatalogItems, getPhotos } from "../api";
 
 interface IContextValue {
-  cart: TItem[];
-  catalog: TItem[];
-  photos: TPhoto[];
+  state: {
+    cart: TItem[];
+    catalog: TItem[];
+    photos: TPhoto[];
+  };
+  actions: {
+    getCatalogItems: (page: number) => void;
+  };
 }
 
 const CommonContext = React.createContext<IContextValue>({} as IContextValue);
 
-const defaultState: IContextValue = {
-  cart: [],
-  catalog: [],
-  photos: [],
-};
-
 const CommonContextProvider = (props: PropsWithChildren) => {
   const { children } = props;
 
-  const [state, setState] = useState<IContextValue>(defaultState);
+  const [state, setState] = useState<IContextValue>({
+    state: {
+      cart: [],
+      catalog: [],
+      photos: [],
+    },
+    actions: {
+      getCatalogItems: async (page: number) => {
+        const catalogDataForPage = await getCatalogItems(page);
+
+        setState((prev) => ({
+          ...prev,
+          state: {
+            ...prev.state,
+            catalog: [...prev.state.catalog, ...catalogDataForPage],
+          },
+        }));
+      },
+    },
+  });
 
   useEffect(() => {
     (async () => {
-      const responseCatalog = await fetch(
-        `${process.env.BACKEND_URL}/api/catalogs?populate=*&pagination[pageSize]=8` as string,
-        {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${process.env.BACKEND_TOKEN}`,
-          },
-        }
-      );
-      const responseCatalogJson: TResponseCollection<TItemResponse> =
-        await responseCatalog.json();
-
-      const catalogData = responseCatalogJson?.data
-        ? formatCatalogData(responseCatalogJson)
-        : [];
-
-      const responsePhotos = await fetch(
-        `${process.env.BACKEND_URL}/api/photo?populate=*&sort[1]=updatedAt:desc` as string,
-        {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${process.env.BACKEND_TOKEN}`,
-          },
-        }
-      );
-
-      const responsePhotosJson: TResponseSingle<TPhotosResponse> =
-        await responsePhotos.json();
-
-      console.log("responsePhotosJson", responsePhotosJson);
-
-      const photosData = responsePhotosJson.data
-        ? formatPhotosData(responsePhotosJson)
-        : [];
+      const catalogData = await getCatalogItems(1);
+      const photosData = await getPhotos();
 
       setState((prev) => ({
         ...prev,
-        catalog: catalogData,
-        photos: photosData,
+        state: {
+          ...prev.state,
+          catalog: catalogData,
+          photos: photosData,
+        },
       }));
     })();
   }, []);

@@ -1,22 +1,36 @@
-import React, { useContext } from "react";
-import { Link } from "gatsby";
+import React, { useContext, useState } from "react";
+import { navigate } from "gatsby";
+
 import { Title } from "../Title/Title";
 import cn from "classnames";
 
 import "./Catalog.scss";
 
-import { CART_LOCAL_STORAGE_KEY, navigationItems } from "../../const";
+import {
+  CART_LOCAL_STORAGE_KEY,
+  MAX_ITEMS_COUNT,
+  navigationItems,
+} from "../../const";
 import { CommonContext } from "../../context/CommonContext";
 import { formatPrice } from "../../utils";
 import { useLocalStorageData } from "../../hooks/useLocalStorageData";
 
-export const Catalog: React.FC = () => {
-  const { catalog } = useContext(CommonContext);
+interface ICatalog {
+  isCatalogPage?: boolean;
+}
+
+export const Catalog: React.FC<ICatalog> = ({ isCatalogPage = false }) => {
+  const {
+    state: { catalog },
+    actions: { getCatalogItems },
+  } = useContext(CommonContext);
 
   const [cart, setCart] = useLocalStorageData<number[]>(
     CART_LOCAL_STORAGE_KEY,
     []
   );
+
+  const [page, setPage] = useState(1);
 
   const addToCart = (id: number) => {
     if (cart.includes(id)) {
@@ -27,13 +41,27 @@ export const Catalog: React.FC = () => {
     setCart([...cart, id]);
   };
 
+  const onButtonClick = () => {
+    if (isCatalogPage) {
+      const nextPage = page + 1;
+      getCatalogItems(nextPage);
+      setPage(nextPage);
+    } else {
+      navigate(navigationItems.catalog.href);
+    }
+  };
+
   return (
     <section className="catalog">
       <div className="catalog__container">
         <Title text="каталог" />
         <div className="catalog__items">
-          {(catalog || []).map((item) => {
-            const idAddedElement = cart.includes(item.id);
+          {(catalog || []).map((item, index) => {
+            if (!isCatalogPage && index > MAX_ITEMS_COUNT - 1) {
+              return null;
+            }
+
+            const isAddedElement = cart.includes(item.id);
 
             return (
               <div className="catalog__item catalog-item">
@@ -54,12 +82,16 @@ export const Catalog: React.FC = () => {
                   </div>
                   <button
                     className={cn("catalog-item__button", {
-                      "catalog-item__button_added": idAddedElement,
+                      "catalog-item__button_added": isAddedElement,
                     })}
                     onClick={() => addToCart(item.id)}
                   >
-                    <img src="/shopping_cart_orange.svg" alt="" />
-                    {idAddedElement ? (
+                    {isAddedElement ? (
+                      <img src="/icon-done.svg" alt="" />
+                    ) : (
+                      <img src="/shopping_cart_orange.svg" alt="" />
+                    )}
+                    {isAddedElement ? (
                       <span>Добавлено</span>
                     ) : (
                       <span>В корзину</span>
@@ -70,9 +102,9 @@ export const Catalog: React.FC = () => {
             );
           })}
         </div>
-        <Link to={navigationItems.catalog.href} className="catalog__button">
-          Показать еще
-        </Link>
+        <button className="catalog__button" onClick={onButtonClick}>
+          {isCatalogPage ? "Показать еще" : "Перейти в католог"}
+        </button>
       </div>
     </section>
   );

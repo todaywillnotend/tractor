@@ -882,6 +882,11 @@ export interface ApiOrderOrder extends Schema.CollectionType {
       }>;
     email: Attribute.Email;
     message: Attribute.Text;
+    cart: Attribute.Relation<
+      'api::order.order',
+      'oneToMany',
+      'api::catalog.catalog'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

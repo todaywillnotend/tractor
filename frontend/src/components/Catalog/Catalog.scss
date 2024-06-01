@@ -82,13 +82,13 @@
 
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
     gap: 30px 30px;
     grid-template-areas:
       "a a"
       "b c";
+    flex: 1;
 
-    grid-template-rows: 48px 45px;
+    grid-template-rows: minmax(48px, auto) minmax(45px, auto);
 
     @include mobile320 {
       gap: 20px 10px;
@@ -151,7 +151,19 @@
 
     transition: all 0.3s ease;
 
-    &_added,
+    &_added {
+      border-color: $green;
+
+      &:hover {
+        background-color: unset !important;
+        color: $black !important;
+
+        img {
+          display: block !important;
+        }
+      }
+    }
+
     &:hover {
       background-color: $orangeDark;
       color: $white;
