@@ -7,9 +7,7 @@ import cn from "classnames";
 import "./PhotoGallery.scss";
 
 export const PhotoGallery: React.FC = () => {
-  const {
-    state: { photos },
-  } = useContext(CommonContext);
+  const photos = useContext(CommonContext)?.state?.photos || [];
 
   useEffect(() => {
     if (photos[0]?.id) {

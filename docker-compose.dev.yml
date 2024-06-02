@@ -1,0 +1,16 @@
+version: "3"
+services:
+  frontend:
+    command: ["./wait-for-strapi.sh", "gatsby", "develop", "--host", "0.0.0.0"]
+    volumes:
+      - ./frontend/src:/home/tractor/src
+    environment:
+      NODE_ENV: development
+    stdin_open: true
+    tty: true
+  backend:
+    stdin_open: true
+    tty: true
+  # db:
+  #   stdin_open: true
+  #   tty: true

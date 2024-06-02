@@ -17,9 +17,7 @@ enum ECartStep {
 }
 
 export const Cart: React.FC = () => {
-  const {
-    state: { catalog },
-  } = useContext(CommonContext);
+  const catalog = useContext(CommonContext)?.state?.catalog || [];
 
   const [step, setStep] = useState<ECartStep>(ECartStep.INIT);
 

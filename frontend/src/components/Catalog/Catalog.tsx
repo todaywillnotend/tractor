@@ -20,10 +20,8 @@ interface ICatalog {
 }
 
 export const Catalog: React.FC<ICatalog> = ({ isCatalogPage = false }) => {
-  const {
-    state: { catalog },
-    actions: { getCatalogItems },
-  } = useContext(CommonContext);
+  const catalog = useContext(CommonContext)?.state?.catalog || [];
+  const getCatalogItems = useContext(CommonContext)?.actions?.getCatalogItems;
 
   const [cart, setCart] = useLocalStorageData<number[]>(
     CART_LOCAL_STORAGE_KEY,
