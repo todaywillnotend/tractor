@@ -46,9 +46,9 @@ export const Head: HeadFC = () => (
     />
     <meta
       property="og:image"
-      content={`${process.env.FRONTEND_URL}/tractor.png`}
+      content={`${process.env.GATSBY_FRONTEND_URL}/tractor.png`}
     />
-    <meta property="og:url" content={process.env.FRONTEND_URL}></meta>
+    <meta property="og:url" content={process.env.GATSBY_FRONTEND_URL}></meta>
     <meta
       property="og:description"
       content="Интернет-магазин по продаже сельхозтехники и различного сельскохозяйственного оборудования. У нас Вы можете купить сельхозтехнику: трактора, бульдозер"

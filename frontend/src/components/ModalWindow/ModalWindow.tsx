@@ -1,6 +1,8 @@
 import React, { PropsWithChildren, useEffect, useState } from "react";
 import Modal from "react-modal";
 import cn from "classnames";
+// @ts-ignore
+import IconClose from "./../../images/icon-close.svg";
 
 import "./ModalWindow.scss";
 
@@ -59,7 +61,7 @@ export const ModalWindow: React.FC<IModalWindow & PropsWithChildren> = ({
         onRequestClose={closeModal}
       >
         <button onClick={closeModal} className="modal-window__close">
-          <img src="/icon-close.svg" alt="" />
+          <img src={IconClose} alt="" />
         </button>
         {children}
       </Modal>

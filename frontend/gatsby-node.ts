@@ -9,38 +9,42 @@ const formatCatalogData = (
   return responseJson.data.map((item) => ({
     ...(item?.attributes || {}),
     id: item.id,
-    image: `${process.env.BACKEND_URL}${item?.attributes?.image?.data?.attributes?.url}`,
+    image: `${process.env.GATSBY_BACKEND_URL}${item?.attributes?.image?.data?.attributes?.url}`,
   }));
 };
 
 const createPages: GatsbyNode["createPages"] = async ({ actions, graphql }) => {
   const { createPage } = actions;
 
-  const responseCatalog = await fetch(
-    `${process.env.BACKEND_URL}/api/catalogs?populate=*&pagination[pageSize]=8` as string,
-    {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${process.env.BACKEND_TOKEN}`,
+  try {
+    const responseCatalog = await fetch(
+      `${process.env.GATSBY_BACKEND_URL}/api/catalogs?populate=*&pagination[pageSize]=8` as string,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${process.env.GATSBY_BACKEND_TOKEN}`,
+        },
+      }
+    );
+    const responseCatalogJson: TResponseCollection<TItemResponse> =
+      await responseCatalog.json();
+
+    const catalogData = responseCatalogJson?.data
+      ? formatCatalogData(responseCatalogJson)
+      : [];
+
+    const keywords = catalogData.map((item) => item.title).join(", ");
+
+    createPage({
+      path: "/catalog",
+      component: resolve("src/templates/catalog.tsx"),
+      context: {
+        keywords,
       },
-    }
-  );
-  const responseCatalogJson: TResponseCollection<TItemResponse> =
-    await responseCatalog.json();
-
-  const catalogData = responseCatalogJson?.data
-    ? formatCatalogData(responseCatalogJson)
-    : [];
-
-  const keywords = catalogData.map((item) => item.title).join(", ");
-
-  createPage({
-    path: "/catalog",
-    component: resolve("src/templates/catalog.tsx"),
-    context: {
-      keywords,
-    },
-  });
+    });
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 export { createPages };

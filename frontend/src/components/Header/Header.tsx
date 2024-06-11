@@ -9,6 +9,10 @@ import { CART_LOCAL_STORAGE_KEY, tel } from "../../const/data";
 import { useLocalStorageData } from "../../hooks/useLocalStorageData";
 import { TItem } from "../../types";
 import { FeedbackPopup } from "../FeedbackPopup/FeedbackPopup";
+// @ts-ignore
+import ShoppingCart from "./../../images/shopping_cart.svg";
+// @ts-ignore
+import ShoppingCartDesktop from "./../../images/shopping_cart_desktop.svg";
 
 export const Header: React.FC = () => {
   const [isBurgerOpen, setIsBurgerOpen] = useState(false);
@@ -100,13 +104,9 @@ export const Header: React.FC = () => {
               "shopping-cart_animation": isBurgerOpen,
             })}
           >
-            <img
-              src="/shopping_cart.svg"
-              alt=""
-              className="shopping-cart__image"
-            />
+            <img src={ShoppingCart} alt="" className="shopping-cart__image" />
             <div className="shopping-cart__desktop">
-              <img src="/shopping_cart_desktop.svg" alt="" />
+              <img src={ShoppingCartDesktop} alt="" />
               <span className="shopping-cart__text">Корзина</span>
             </div>
             <div className="shopping-cart__count">

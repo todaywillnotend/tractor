@@ -1,0 +1,24 @@
+FROM node:18
+
+# Also exposing VSCode debug ports
+EXPOSE 8000 9929 9230
+
+# Create and set workdir
+RUN mkdir -p /usr/src/frontend
+WORKDIR /usr/src/frontend
+
+# Install nodejs global packages
+RUN npm install -g gatsby-cli
+
+# Copy package.json to cache packages image layer
+COPY package*.json ./
+
+# Install nodejs local packages
+RUN yarn install --frozen-lockfile
+
+RUN yarn add --arch=x64 --platform=linux --target=16x sharp
+
+# Copy sourcecode files
+COPY . .
+
+RUN chmod +x ./scripts/wait-for-strapi.sh

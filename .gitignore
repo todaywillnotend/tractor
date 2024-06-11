@@ -1,3 +1,7 @@
+.DS_Store
+reverse_proxy/ssl/
+public/
+
 # Logs
 logs
 *.log

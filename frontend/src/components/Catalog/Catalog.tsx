@@ -14,6 +14,10 @@ import {
 import { CommonContext } from "../../context/CommonContext";
 import { formatPrice } from "../../utils";
 import { useLocalStorageData } from "../../hooks/useLocalStorageData";
+// @ts-ignore
+import IconDone from "./../../images/icon-done.svg";
+// @ts-ignore
+import ShoppingCartOrangeIcon from "./../../images/shopping_cart_orange.svg";
 
 interface ICatalog {
   isCatalogPage?: boolean;
@@ -85,9 +89,9 @@ export const Catalog: React.FC<ICatalog> = ({ isCatalogPage = false }) => {
                     onClick={() => addToCart(item.id)}
                   >
                     {isAddedElement ? (
-                      <img src="/icon-done.svg" alt="" />
+                      <img src={IconDone} alt="" />
                     ) : (
-                      <img src="/shopping_cart_orange.svg" alt="" />
+                      <img src={ShoppingCartOrangeIcon} alt="" />
                     )}
                     {isAddedElement ? (
                       <span>Добавлено</span>

@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+// @ts-ignore
+import IconDone from "./../../images/icon-done.svg";
 
 import "./Form.scss";
 
@@ -72,12 +74,12 @@ export const Form: React.FC<IForm> = ({
 
     try {
       const responseForm = await fetch(
-        `${process.env.BACKEND_URL}/api/orders` as string,
+        `${process.env.GATSBY_BACKEND_URL}/api/orders` as string,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${process.env.BACKEND_TOKEN}`,
+            Authorization: `Bearer ${process.env.GATSBY_BACKEND_TOKEN}`,
           },
           body: JSON.stringify({ data: formattedFormData }),
         }
@@ -101,7 +103,7 @@ export const Form: React.FC<IForm> = ({
         <div className="form__content">
           {isSuccess ? (
             <div className="form__success">
-              <img src="/icon-success.svg" alt="" />
+              <img src={IconDone} alt="" />
 
               <span>{"Ваша заявка успешно отправлена"}</span>
             </div>

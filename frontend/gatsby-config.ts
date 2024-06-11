@@ -1,14 +1,12 @@
 import type { GatsbyConfig } from "gatsby";
 
-require("dotenv").config({
-  path: `.env.${process.env.NODE_ENV}`,
-});
+require("dotenv").config();
 
 const config: GatsbyConfig = {
   pathPrefix: "/",
   siteMetadata: {
     title: `Трактор T-150`,
-    siteUrl: process.env.FRONTEND_URL,
+    siteUrl: process.env.GATSBY_FRONTEND_URL,
   },
   // More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.
   // If you use VSCode you can also use the GraphQL plugin
@@ -32,8 +30,8 @@ const config: GatsbyConfig = {
     {
       resolve: "gatsby-plugin-robots-txt",
       options: {
-        host: process.env.FRONTEND_URL,
-        sitemap: `${process.env.FRONTEND_URL}/sitemap.xml`,
+        host: process.env.GATSBY_FRONTEND_URL,
+        sitemap: `${process.env.GATSBY_FRONTEND_URL}/sitemap.xml`,
         policy: [
           {
             userAgent: "*",

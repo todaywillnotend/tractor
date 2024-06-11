@@ -1,5 +1,81 @@
-version: "3"
+version: "3.3"
+
 services:
+  reverse-proxy:
+    image: nginx:1.17.10
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - app-network
+    volumes:
+      - ./reverse_proxy/nginx.conf:/etc/nginx/nginx.conf
+      - ./reverse_proxy/ssl/:/etc/nginx/ssl/
+    ports:
+      - 80:80
+      - 443:443
+
   frontend:
+    stdin_open: true
+    tty: true
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.prod
+    volumes:
+      - ./frontend/src/:/usr/src/frontend/src
+      - ./frontend/gatsby-config.ts:/usr/src/frontend/gatsby-config.ts
+      - ./frontend/scripts/cronjob.js:/usr/src/frontend/scripts/cronjob.js
+      - /usr/src/frontend/node_modules
+    networks:
+      - app-network
     environment:
       NODE_ENV: production
+      STRAPI_URL: http://51.250.76.250:1337
+      GATSBY_BACKEND_URL: http://51.250.76.250:1337
+      GATSBY_BACKEND_TOKEN: dfa36a27ece762e5381584ba106650e9906cf06ed65cb6ad5000f54b4d68f7c48f4032ce64e04e2a693e11b587cff079761dcf5ac8cc3ea5f9f5c99894f83a7ff887f21c70ab31177d42c2c6ed23a2df8deb9e77bc3a47ae4cdc45b7fac1cefb5aa45c590732f7ef2ad01271db39d897f5fa3ba27c668a4466bd14b954c1bbfb
+      GATSBY_FRONTEND_URL: http://51.250.76.250
+    depends_on:
+      - backend
+    ports:
+      - 3000:3000
+
+  backend:
+    stdin_open: true
+    tty: true
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.prod
+    volumes:
+      - ./config:/opt/app/config
+      - ./src:/opt/app/src
+      - ./package.json:/opt/package.json
+      - ./yarn.lock:/opt/yarn.lock
+      - ./.env:/opt/app/.env
+      - ./public/uploads:/opt/app/public/uploads
+    networks:
+      - app-network
+    environment:
+      NODE_ENV: production
+      HOST: 0.0.0.0
+      PORT: 1337
+      APP_KEYS: B9Hi1jAd9NNenqYN73DPcw==,RNxKP5vjEt1aj4or0wnPEQ==,ORRO8yILNK7CsTdB4rInRQ==,sqvQUngp6cgxPw+ZIuoH/Q==
+      API_TOKEN_SALT: cXhrYqY5uVTrfkj/njbouA==
+      ADMIN_JWT_SECRET: DdFTXp8yIY3VHfOHUd/Btg==
+      TRANSFER_TOKEN_SALT: zLXkayR6XqbEN130yTMDaw==
+
+      DATABASE_CLIENT: sqlite
+      DATABASE_FILENAME: .tmp/data.db
+      JWT_SECRET: 1+Nl3cItlLBrAVGDtKSp/g==
+      NTBA_FIX_319: 1
+
+      TELEGRAM_TOKEN: 7054787088:AAHd1-1UuWGTwYo3CBOvytMoACve3aGWrJY
+      RESEND_API_KEY: re_i9tQfThW_QFc87jisdi8MvWkShrmXarfk
+      RESEND_EMAIL: todaywillnotend@gmail.com
+      BACKEND_URL: http://51.250.76.250:1337
+      BACKEND_TOKEN: dfa36a27ece762e5381584ba106650e9906cf06ed65cb6ad5000f54b4d68f7c48f4032ce64e04e2a693e11b587cff079761dcf5ac8cc3ea5f9f5c99894f83a7ff887f21c70ab31177d42c2c6ed23a2df8deb9e77bc3a47ae4cdc45b7fac1cefb5aa45c590732f7ef2ad01271db39d897f5fa3ba27c668a4466bd14b954c1bbfb
+    ports:
+      - "1337:1337"
+
+networks:
+  app-network:
+    driver: bridge

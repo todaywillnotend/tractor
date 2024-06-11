@@ -4,11 +4,11 @@ import { TItem, TItemResponse, TResponseCollection } from "../types";
 export const getCatalogItems = async (page: number = 1) => {
   try {
     const responseCatalog = await fetch(
-      `${process.env.BACKEND_URL}/api/catalogs?populate=*&pagination[page]=${page}&&pagination[pageSize]=${MAX_ITEMS_COUNT}` as string,
+      `${process.env.GATSBY_BACKEND_URL}/api/catalogs?populate=*&pagination[page]=${page}&&pagination[pageSize]=${MAX_ITEMS_COUNT}` as string,
       {
         method: "GET",
         headers: {
-          Authorization: `Bearer ${process.env.BACKEND_TOKEN}`,
+          Authorization: `Bearer ${process.env.GATSBY_BACKEND_TOKEN}`,
         },
       }
     );
@@ -33,6 +33,6 @@ const formatCatalogData = (
   return responseJson.data.map((item) => ({
     ...(item?.attributes || {}),
     id: item.id,
-    image: `${process.env.BACKEND_URL}${item?.attributes?.image?.data?.attributes?.url}`,
+    image: `${process.env.GATSBY_BACKEND_URL}${item?.attributes?.image?.data?.attributes?.url}`,
   }));
 };

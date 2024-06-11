@@ -6,6 +6,8 @@ import { formatPrice } from "../../utils";
 import { CommonContext } from "../../context/CommonContext";
 import { useLocalStorageData } from "../../hooks/useLocalStorageData";
 import { CART_LOCAL_STORAGE_KEY } from "../../const";
+// @ts-ignore
+import IconTrash from "./../../images/icon-trash.svg";
 
 import "./Cart.scss";
 import { Form } from "../Form/Form";
@@ -76,7 +78,7 @@ export const Cart: React.FC = () => {
                     className="button-trash"
                     onClick={() => setCart(cart.filter((el) => el !== item.id))}
                   >
-                    <img src="/icon-trash.svg" alt="" />
+                    <img src={IconTrash} alt="" />
                   </button>
                   <div className="catalog-item__image">
                     <img src={item.image} alt={item.title} />
