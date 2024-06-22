@@ -1,4 +1,4 @@
-FROM node:18
+FROM node:18-alpine
 
 # Also exposing VSCode debug ports
 EXPOSE 8000 9929 9230
@@ -12,6 +12,14 @@ RUN npm install -g gatsby-cli
 
 # Copy package.json to cache packages image layer
 COPY package*.json ./
+
+# # Needed for parcel (Which in turn is needed for building gatsby)
+# RUN \
+#   apk add --no-cache python make g++ && \
+#   apk add vips-dev fftw-dev --update-cache \
+#   --repository http://dl-3.alpinelinux.org/alpine/edge/community \
+#   --repository http://dl-3.alpinelinux.org/alpine/edge/main \
+#   && rm -fR /var/cache/apk/*
 
 # Install nodejs local packages
 RUN yarn install --frozen-lockfile

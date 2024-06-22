@@ -1,4 +1,4 @@
-FROM node:18
+FROM node:18-alpine
 
 # Create and set workdir
 RUN mkdir -p /usr/src/frontend
@@ -11,10 +11,17 @@ RUN npm install -g gatsby-cli
 COPY package*.json ./
 
 # # Needed for parcel (Which in turn is needed for building gatsby)
-# RUN apk add python3 make g++
+# RUN \
+#   apk add --no-cache python make g++ && \
+#   apk add vips-dev fftw-dev --update-cache \
+#   --repository http://dl-3.alpinelinux.org/alpine/edge/community \
+#   --repository http://dl-3.alpinelinux.org/alpine/edge/main \
+#   && rm -fR /var/cache/apk/*
 
+
+RUN yarn config set network-timeout 1000000 -g 
 # Install nodejs local packages
-RUN yarn install
+RUN yarn install --production --frozen-lockfile
 
 # Install PM2 globally as node progress manager to start and monitor an express server
 RUN yarn global add pm2
@@ -24,9 +31,6 @@ RUN yarn cache clean
 
 # Copy everything over
 COPY . .
-
-RUN chmod +x ./scripts/wait-for-strapi.sh
-# CMD ["./scripts/wait-for-strapi.sh"]
 
 # Run cronjob script to rebuild the page periodically and serve via express
 CMD pm2 start ./scripts/cronjob.js --no-autorestart --instances 1 --cron "*/30 * * * *" ./scripts/server.js && pm2 logs

@@ -2,8 +2,7 @@ version: "3.8"
 
 services:
   frontend:
-    command:
-      ["./scripts/wait-for-strapi.sh", "gatsby", "develop", "--host", "0.0.0.0"]
+    command: ["gatsby", "develop", "--host", "0.0.0.0"]
     build:
       context: ./frontend
       dockerfile: Dockerfile.dev
