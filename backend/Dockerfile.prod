@@ -8,7 +8,7 @@ RUN yarn global add node-gyp
 RUN yarn config set network-timeout 1000000 -g 
 RUN yarn install --production
 ENV PATH /opt/node_modules/.bin:$PATH
-WORKDIR /opt/app
+WORKDIR /opt/backend
 COPY . .
 RUN yarn build
 
@@ -19,13 +19,13 @@ RUN apk add --no-cache vips-dev
 ENV NODE_ENV=production
 WORKDIR /opt/
 COPY --from=build /opt/node_modules ./node_modules
-WORKDIR /opt/app
-COPY --from=build /opt/app ./
+WORKDIR /opt/backend
+COPY --from=build /opt/backend ./
 ENV PATH /opt/node_modules/.bin:$PATH
 RUN yarn global add pm2
 
-RUN chown -R node:node /opt/app
-RUN chmod 777 -R /opt/app/public/uploads
+RUN chown -R node:node /opt/backend
+RUN chmod 777 -R /opt/backend/public/uploads
 EXPOSE 1337
 
 # Run strapi inside pm2

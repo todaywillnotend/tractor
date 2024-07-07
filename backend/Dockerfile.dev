@@ -1,8 +1,8 @@
 FROM node:18
 
 # Server path
-RUN mkdir -p /usr/src/backend
-WORKDIR /usr/src/backend
+RUN mkdir -p /opt/backend
+WORKDIR /opt/backend
 
 # Copy package.json that holds our configuration
 COPY ./package.json .

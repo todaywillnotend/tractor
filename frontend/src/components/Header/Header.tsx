@@ -23,7 +23,7 @@ export const Header: React.FC = () => {
     if (typeof window !== "undefined") {
       return window?.location?.pathname;
     }
-  }, []);
+  }, [window]);
 
   return (
     <header className="header">

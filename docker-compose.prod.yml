@@ -22,10 +22,11 @@ services:
       context: ./frontend
       dockerfile: Dockerfile.prod
     volumes:
-      - ./frontend/src/:/usr/src/frontend/src
-      - ./frontend/gatsby-config.ts:/usr/src/frontend/gatsby-config.ts
-      - ./frontend/scripts/cronjob.js:/usr/src/frontend/scripts/cronjob.js
-      - /usr/src/frontend/node_modules
+      - ./frontend/src/:/opt/frontend/src
+      - ./frontend/gatsby-config.ts:/opt/frontend/gatsby-config.ts
+      - ./frontend/scripts/cronjob.js:/opt/frontend/scripts/cronjob.js
+      - ./frontend/scripts/server.js:/opt/frontend/scripts/server.js
+      - /opt/frontend/node_modules
     networks:
       - app-network
     environment:
@@ -46,12 +47,12 @@ services:
       context: ./backend
       dockerfile: Dockerfile.prod
     volumes:
-      - ./config:/opt/app/config
-      - ./src:/opt/app/src
+      - ./config:/opt/backend/config
+      - ./src:/opt/backend/src
       - ./package.json:/opt/package.json
       - ./yarn.lock:/opt/yarn.lock
-      - ./.env:/opt/app/.env
-      - ./public/uploads:/opt/app/public/uploads
+      - ./.env:/opt/backend/.env
+      - ./public/uploads:/opt/backend/public/uploads
     networks:
       - app-network
     environment:

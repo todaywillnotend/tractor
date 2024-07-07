@@ -1,32 +1,27 @@
 FROM node:18-alpine
 
-# Also exposing VSCode debug ports
-EXPOSE 8000 9929 9230
-
 # Create and set workdir
-RUN mkdir -p /usr/src/frontend
-WORKDIR /usr/src/frontend
+RUN mkdir -p /opt/frontend
+RUN chown -R node:node /opt/frontend
+WORKDIR /opt/frontend
 
 # Install nodejs global packages
 RUN npm install -g gatsby-cli
 
 # Copy package.json to cache packages image layer
-COPY package*.json ./
+COPY package.json ./
+COPY yarn.lock ./
 
 # # Needed for parcel (Which in turn is needed for building gatsby)
-# RUN \
-#   apk add --no-cache python make g++ && \
-#   apk add vips-dev fftw-dev --update-cache \
-#   --repository http://dl-3.alpinelinux.org/alpine/edge/community \
-#   --repository http://dl-3.alpinelinux.org/alpine/edge/main \
-#   && rm -fR /var/cache/apk/*
+RUN apk add --no-cache python3 make g++ && apk add vips-dev fftw-dev --update-cache && rm -fR /var/cache/apk/*
 
-# Install nodejs local packages
-RUN yarn install --frozen-lockfile
-
-RUN yarn add --arch=x64 --platform=linux --target=16x sharp
+RUN yarn config set network-timeout 1000000 -g 
+RUN yarn install --frozen-lockfile --no-cache
 
 # Copy sourcecode files
 COPY . .
 
-RUN chmod +x ./scripts/wait-for-strapi.sh
+# Also exposing VSCode debug ports
+EXPOSE 8000 9929 9230
+
+CMD gatsby develop --host 0.0.0.0

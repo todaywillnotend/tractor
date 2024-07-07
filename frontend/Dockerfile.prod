@@ -1,8 +1,8 @@
 FROM node:18-alpine
 
 # Create and set workdir
-RUN mkdir -p /usr/src/frontend
-WORKDIR /usr/src/frontend
+RUN mkdir -p /opt/frontend
+WORKDIR /opt/frontend
 
 # Gatsby CLI that provides the 'gatsby develop' command
 RUN npm install -g gatsby-cli
@@ -11,13 +11,7 @@ RUN npm install -g gatsby-cli
 COPY package*.json ./
 
 # # Needed for parcel (Which in turn is needed for building gatsby)
-# RUN \
-#   apk add --no-cache python make g++ && \
-#   apk add vips-dev fftw-dev --update-cache \
-#   --repository http://dl-3.alpinelinux.org/alpine/edge/community \
-#   --repository http://dl-3.alpinelinux.org/alpine/edge/main \
-#   && rm -fR /var/cache/apk/*
-
+RUN apk add --no-cache python3 make g++ && apk add vips-dev fftw-dev --update-cache && rm -fR /var/cache/apk/*
 
 RUN yarn config set network-timeout 1000000 -g 
 # Install nodejs local packages

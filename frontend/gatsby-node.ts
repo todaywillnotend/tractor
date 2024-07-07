@@ -29,6 +29,7 @@ async function checkBackendAvailability(
       }
       console.log("Backend is unavailable - sleeping");
     } catch (error) {
+      console.error("Error request", url, error);
       // Ignoring the error as the fetch will fail if the backend is not available
     }
 
