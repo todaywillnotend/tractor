@@ -23,7 +23,7 @@ export const Header: React.FC = () => {
     if (typeof window !== "undefined") {
       return window?.location?.pathname;
     }
-  }, [window]);
+  }, []);
 
   const toggleBurger = () => {
     setIsBurgerOpen((prev) => {

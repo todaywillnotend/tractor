@@ -53,6 +53,7 @@ services:
       - ./yarn.lock:/opt/yarn.lock
       - ./.env:/opt/backend/.env
       - ./public/uploads:/opt/backend/public/uploads
+      - ./.tmp:/opt/backend/.tmp
     networks:
       - app-network
     environment:

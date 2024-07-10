@@ -18,16 +18,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
           port: 22
-           script: |
-                ls -a
-                git pull
+          script: |
+                cd tractor
+                git pull --rebase origin main
                 sudo NODE_ENV=production docker-compose -f docker-compose.prod.yml up -d --no-deps --build
-
-    # - name: Run commands on VM
-    #   env:
-    #        YANDEX_KEY: ${{ secrets.YANDEX_KEY }}
-    #        IMAGE_TAG: ${{ github.sha }}
-    #   run: |
-    #       pwd
-    #       git pull
-    #       sudo NODE_ENV=production docker-compose -f docker-compose.prod.yml up -d --no-deps --build
