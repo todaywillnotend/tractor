@@ -71,7 +71,7 @@ services:
 
       TELEGRAM_TOKEN: 7054787088:AAHd1-1UuWGTwYo3CBOvytMoACve3aGWrJY
       RESEND_API_KEY: re_i9tQfThW_QFc87jisdi8MvWkShrmXarfk
-      RESEND_EMAIL: todaywillnotend@gmail.com
+      RESEND_EMAIL: htz34@yandex.ru
       BACKEND_URL: https://xn--80ascqaidaiedd.xn--p1ai/backend
       BACKEND_TOKEN: dfa36a27ece762e5381584ba106650e9906cf06ed65cb6ad5000f54b4d68f7c48f4032ce64e04e2a693e11b587cff079761dcf5ac8cc3ea5f9f5c99894f83a7ff887f21c70ab31177d42c2c6ed23a2df8deb9e77bc3a47ae4cdc45b7fac1cefb5aa45c590732f7ef2ad01271db39d897f5fa3ba27c668a4466bd14b954c1bbfb
     ports:

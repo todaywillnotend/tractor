@@ -302,8 +302,10 @@ $animationStep2Delay: $animationStep1Delay + $animationStep2;
     top: 1.5px;
     right: 3px;
     font-size: 6px;
+    width: 3.5px;
 
     @include desktop {
+      width: unset;
       min-width: 10px;
       display: flex;
       justify-content: center;

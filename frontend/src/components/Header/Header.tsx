@@ -5,7 +5,7 @@ import cn from "classnames";
 import "./Header.scss";
 
 import { navigationItems } from "../../const";
-import { CART_LOCAL_STORAGE_KEY, tel } from "../../const/data";
+import { CART_LOCAL_STORAGE_KEY, tel, clock } from "../../const/data";
 import { useLocalStorageData } from "../../hooks/useLocalStorageData";
 import { TItem } from "../../types";
 import { FeedbackPopup } from "../FeedbackPopup/FeedbackPopup";
@@ -25,6 +25,16 @@ export const Header: React.FC = () => {
     }
   }, [window]);
 
+  const toggleBurger = () => {
+    setIsBurgerOpen((prev) => {
+      prev
+        ? (document.body.style.overflow = "unset")
+        : (document.body.style.overflow = "hidden");
+
+      return !prev;
+    });
+  };
+
   return (
     <header className="header">
       <div
@@ -32,9 +42,7 @@ export const Header: React.FC = () => {
           header__top_animation: isBurgerOpen,
         })}
       >
-        <div className="header__address">
-          г. Волжский, ул 6-ая Автодорога, д. 22, офис 10
-        </div>
+        <div className="header__address">{clock.title}</div>
         <a className="header__phone" href={tel.href}>
           {tel.title}
         </a>
@@ -78,8 +86,8 @@ export const Header: React.FC = () => {
             </div>
           </div>
           <div className="header__text">
-            <span className="header__title">T-150</span>
-            <span className="header__subtitle">Ремонт техники</span>
+            <span className="header__title">ТракторСтрой</span>
+            <span className="header__subtitle">Продажа сельхозтехники</span>
           </div>
         </Link>
         <div className="header__middle">
@@ -114,15 +122,7 @@ export const Header: React.FC = () => {
             </div>
           </Link>
           <button
-            onClick={() => {
-              setIsBurgerOpen((prev) => {
-                prev
-                  ? (document.body.style.overflow = "unset")
-                  : (document.body.style.overflow = "hidden");
-
-                return !prev;
-              });
-            }}
+            onClick={toggleBurger}
             className={cn("header__burger burger", {
               burger_active: isBurgerOpen,
             })}
@@ -146,7 +146,13 @@ export const Header: React.FC = () => {
             subtitle=" "
             className="feedback__popup"
             renderButton={({ openModal }) => (
-              <button className="feedback__button" onClick={() => openModal()}>
+              <button
+                className="feedback__button"
+                onClick={() => {
+                  toggleBurger();
+                  openModal();
+                }}
+              >
                 Напишите нам
               </button>
             )}
@@ -157,7 +163,13 @@ export const Header: React.FC = () => {
             withEmail={false}
             className="feedback__popup"
             renderButton={({ openModal }) => (
-              <button className="feedback__button" onClick={() => openModal()}>
+              <button
+                className="feedback__button"
+                onClick={() => {
+                  toggleBurger();
+                  openModal();
+                }}
+              >
                 Обратный звонок
               </button>
             )}

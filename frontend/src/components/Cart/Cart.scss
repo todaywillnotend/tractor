@@ -121,3 +121,14 @@
     }
   }
 }
+
+.cart-empty {
+  margin-top: 50px;
+  padding: 0 20px;
+
+  &__image {
+    width: 100%;
+    max-width: 400px;
+    border-radius: 5%;
+  }
+}

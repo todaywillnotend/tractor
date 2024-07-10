@@ -1,16 +1,16 @@
 export const tel = {
   text: "Телефон",
-  href: "tel:+78442459132",
+  href: "tel:+79093801616",
   icon: "/icon-phone.svg",
-  title: "+7 8442 45-91-32",
-  subtitle: "Отдел ООО “ТД ВТ” по реализации Т-150 после капитального ремонта",
+  title: "+7 909 380-16-16",
+  subtitle: "",
 };
 
 export const mail = {
   text: "Почта",
-  href: "mailto:Т150@34mail.ru",
+  href: "mailto:htz34@yandex.ru",
   icon: "/icon-mail.svg",
-  title: "Т150@34mail.ru",
+  title: "htz34@yandex.ru",
   subtitle: "Главный менеджер отдела - Кап.ремонт Т-150",
 };
 
@@ -26,7 +26,7 @@ export const clock = {
   text: "Адрес",
   icon: "/icon-map.svg",
   href: "#",
-  title: "г. Волжский, ул 6-ая Автодорога, д. 22, офис 10",
+  title: "г. Волжский, улица имени Ф.Г. Логинова, 187",
   subtitle: "Волжский",
 };
 

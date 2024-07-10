@@ -22,29 +22,16 @@ export const ModalWindow: React.FC<IModalWindow & PropsWithChildren> = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  useEffect(() => {
-    if (isModalOpen !== undefined) {
-      if (isModalOpen) {
-        document.body.style.overflow = "hidden";
-      } else {
-        document.body.style.overflow = "unset";
-      }
-    } else {
-      if (isOpen) {
-        document.body.style.overflow = "hidden";
-      } else {
-        document.body.style.overflow = "unset";
-      }
-    }
-  }, [isOpen, isModalOpen]);
-
   const openModal = () => {
     setIsOpen(true);
     setIsModalOpen?.(true);
+    document.body.style.overflow = "hidden";
   };
+
   const closeModal = () => {
     setIsOpen(false);
     setIsModalOpen?.(false);
+    document.body.style.overflow = "unset";
   };
 
   return (

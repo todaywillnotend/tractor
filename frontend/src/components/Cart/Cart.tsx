@@ -8,9 +8,9 @@ import { useLocalStorageData } from "../../hooks/useLocalStorageData";
 import { CART_LOCAL_STORAGE_KEY } from "../../const";
 // @ts-ignore
 import IconTrash from "./../../images/icon-trash.svg";
+import { Form } from "../Form/Form";
 
 import "./Cart.scss";
-import { Form } from "../Form/Form";
 
 enum ECartStep {
   INIT = "INIT",
@@ -57,6 +57,15 @@ export const Cart: React.FC = () => {
   return (
     <section className="cart">
       <Title text="Корзина" align="center" />
+      {step === ECartStep.INIT && (
+        <div className="cart-empty">
+          <img
+            className="cart-empty__image"
+            src="/empty.jpg"
+            alt="Корзина пуста"
+          />
+        </div>
+      )}
       {step === ECartStep.CART && (
         <div className="cart__container">
           <div className="cart-result">
