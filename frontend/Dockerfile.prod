@@ -9,6 +9,7 @@ RUN npm install -g gatsby-cli
 
 # Copy package.json that holds our configuration
 COPY package*.json ./
+COPY yarn.lock ./
 
 # # Needed for parcel (Which in turn is needed for building gatsby)
 RUN apk add --no-cache python3 make g++ && apk add vips-dev fftw-dev --update-cache && rm -fR /var/cache/apk/*

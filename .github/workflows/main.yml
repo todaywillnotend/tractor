@@ -1,0 +1,33 @@
+name: Deploy
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Connect to VM via SSH
+      uses: appleboy/ssh-action@master
+      with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          port: 22
+           script: |
+                ls -a
+                git pull
+                sudo NODE_ENV=production docker-compose -f docker-compose.prod.yml up -d --no-deps --build
+
+    # - name: Run commands on VM
+    #   env:
+    #        YANDEX_KEY: ${{ secrets.YANDEX_KEY }}
+    #        IMAGE_TAG: ${{ github.sha }}
+    #   run: |
+    #       pwd
+    #       git pull
+    #       sudo NODE_ENV=production docker-compose -f docker-compose.prod.yml up -d --no-deps --build
