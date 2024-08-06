@@ -20,7 +20,7 @@ export const Footer: React.FC = () => {
             ремонта Капремонт Т-150
           </div> */}
         </div>
-        <div className="footer__tight">
+        <div className="footer__right">
           <div className="feedback feedback_desktop">
             <FeedbackPopup
               title="Напишите нам"

@@ -4,7 +4,8 @@
   "info": {
     "singularName": "catalog",
     "pluralName": "catalogs",
-    "displayName": "Catalog"
+    "displayName": "Catalog",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -23,12 +24,27 @@
       "type": "integer"
     },
     "image": {
-      "allowedTypes": [
-        "images"
-      ],
       "type": "media",
       "multiple": false,
-      "required": true
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "meta_description": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "spec": {
+      "type": "json"
+    },
+    "meta_title": {
+      "type": "string"
+    },
+    "meta_keywords": {
+      "type": "string"
     }
   }
 }

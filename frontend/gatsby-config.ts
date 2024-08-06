@@ -42,9 +42,9 @@ const config: GatsbyConfig = {
       },
     },
     {
-      resolve: `gatsby-plugin-yandex-metrica`,
+      resolve: `gatsby-plugin-yandex-metrika`,
       options: {
-        trackingId: "97789513",
+        trackingId: 97789513,
         clickmap: true,
         trackLinks: true,
         accurateTrackBounce: true,

@@ -38,9 +38,10 @@ export const Form: React.FC<IForm> = ({
     message: "",
     cart,
   });
+  const [privacy, setPrivacy] = useState(false);
 
   const isButtonEnabled = Boolean(
-    formData.phone.length >= 10 && formData.phone.length < 13
+    formData.phone.length >= 10 && formData.phone.length < 13 && privacy,
   );
   const [isSuccess, setIsSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -178,6 +179,19 @@ export const Form: React.FC<IForm> = ({
                     {formData.message}
                   </textarea>
                 )}
+                <label className="form__privacy">
+                  <input
+                    type="checkbox"
+                    checked={privacy}
+                    onClick={() => setPrivacy((prev) => !prev)}
+                  />{" "}
+                  Я даю согласие на обработку персональных данных в
+                  соотстветствии с{" "}
+                  <a href="/privacy" className="privacy-link" target="_blank">
+                    Политикой&#160;конфиденциальности
+                  </a>
+                    .
+                </label>
                 <div className="form__buttons">
                   {onCloseClick && (
                     <button

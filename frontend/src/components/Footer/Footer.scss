@@ -30,8 +30,10 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    flex: 1;
 
     @include desktop {
+      flex: unset;
       gap: 40px;
     }
   }

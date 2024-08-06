@@ -34,8 +34,13 @@ services:
       context: ./backend
       dockerfile: Dockerfile.dev
     volumes:
-      - ./backend/src/:/opt/backend/src
-      - /opt/backend/node_modules
+      - ./backend/config:/opt/backend/config
+      - ./backend/src:/opt/backend/src
+      - ./backend/package.json:/opt/package.json
+      - ./backend/yarn.lock:/opt/yarn.lock
+      - ./backend/.env:/opt/backend/.env
+      - ./backend/public/uploads:/opt/backend/public/uploads
+      - ./backend/.tmp:/opt/backend/.tmp
     networks:
       - app-network
     environment:

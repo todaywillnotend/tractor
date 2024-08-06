@@ -38,13 +38,11 @@
     align-items: center;
     gap: 30px;
     width: 100%;
-    height: 100%;
 
     @include desktop {
       background-color: $white;
       box-sizing: border-box;
       max-width: 954px;
-      height: 512px;
       width: 100%;
       gap: 40px;
 
@@ -189,6 +187,14 @@
 
     @include desktop {
       height: 168px;
+    }
+  }
+
+  &__privacy {
+    max-width: 754px;
+
+    .privacy-link {
+      color: $orangeDark;
     }
   }
 }

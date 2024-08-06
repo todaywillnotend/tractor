@@ -18,4 +18,4 @@ const PhotoPage: React.FC<PageProps> = () => {
 
 export default PhotoPage;
 
-export const Head: HeadFC = () => <title>Фото</title>;
+export const Head: HeadFC = () => <title>ТракторСтрой - Фото</title>;

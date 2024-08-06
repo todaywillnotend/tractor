@@ -19,4 +19,4 @@ const CartPage: React.FC<PageProps> = () => {
 
 export default CartPage;
 
-export const Head: HeadFC = () => <title>Корзина</title>;
+export const Head: HeadFC = () => <title>ТракторСтрой - Корзина</title>;

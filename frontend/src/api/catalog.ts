@@ -1,7 +1,7 @@
 import { MAX_ITEMS_COUNT } from "../const";
 import { TItem, TItemResponse, TResponseCollection } from "../types";
 
-export const getCatalogItems = async (page: number = 1) => {
+export const getCatalogItems = async (page: number = 1): Promise<{ data: TItem[], hasMorePage: boolean }> => {
   try {
     const responseCatalog = await fetch(
       `${process.env.GATSBY_BACKEND_URL}/api/catalogs?populate=*&pagination[page]=${page}&&pagination[pageSize]=${MAX_ITEMS_COUNT}` as string,
@@ -20,10 +20,13 @@ export const getCatalogItems = async (page: number = 1) => {
       ? formatCatalogData(responseCatalogJson)
       : [];
 
-    return catalogData;
+    const hasMorePage =
+      responseCatalogJson.meta.pagination.total > page * MAX_ITEMS_COUNT;
+
+    return { data: catalogData, hasMorePage };
   } catch (error) {
     console.error(error);
-    return [];
+    return { data: [], hasMorePage: false };
   }
 };
 

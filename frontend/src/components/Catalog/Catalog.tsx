@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { navigate } from "gatsby";
+import { Link, navigate } from "gatsby";
 
 import { Title } from "../Title/Title";
 import cn from "classnames";
@@ -25,6 +25,8 @@ interface ICatalog {
 
 export const Catalog: React.FC<ICatalog> = ({ isCatalogPage = false }) => {
   const catalog = useContext(CommonContext)?.state?.catalog || [];
+  const hasMorePage =
+    useContext(CommonContext)?.state?.hasMorePageForCatalogItems;
   const getCatalogItems = useContext(CommonContext)?.actions?.getCatalogItems;
 
   const [cart, setCart] = useLocalStorageData<number[]>(
@@ -67,11 +69,19 @@ export const Catalog: React.FC<ICatalog> = ({ isCatalogPage = false }) => {
 
             return (
               <div className="catalog__item catalog-item">
-                <div className="catalog-item__image">
+                <Link
+                  to={`/catalog/${item.id}`}
+                  className="catalog-item__image"
+                >
                   <img src={item.image} alt={item.title} />
-                </div>
+                </Link>
                 <div className="catalog-item__container">
-                  <p className="catalog-item__title">{item.title}</p>
+                  <Link
+                    to={`/catalog/${item.id}`}
+                    className="catalog-item__title"
+                  >
+                    {item.title}
+                  </Link>
                   <div className="catalog-item__price">
                     {item.last_price && (
                       <div className="catalog-item__price_old">
@@ -104,9 +114,11 @@ export const Catalog: React.FC<ICatalog> = ({ isCatalogPage = false }) => {
             );
           })}
         </div>
-        <button className="catalog__button" onClick={onButtonClick}>
-          {isCatalogPage ? "Показать еще" : "Перейти в католог"}
-        </button>
+        {hasMorePage && (
+          <button className="catalog__button" onClick={onButtonClick}>
+            {isCatalogPage ? "Показать еще" : "Перейти в католог"}
+          </button>
+        )}
       </div>
     </section>
   );

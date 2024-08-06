@@ -57,7 +57,7 @@ const createPages: GatsbyNode["createPages"] = async ({ actions, graphql }) => {
 
   try {
     const responseCatalog = await fetch(
-      `${process.env.STRAPI_URL}/api/catalogs` as string,
+      `${process.env.STRAPI_URL}/api/catalogs?populate=*` as string,
       {
         method: "GET",
         headers: {
@@ -81,6 +81,25 @@ const createPages: GatsbyNode["createPages"] = async ({ actions, graphql }) => {
       context: {
         keywords,
       },
+    });
+
+    catalogData.forEach((item) => {
+      createPage({
+        path: `/catalog/${item.id}`,
+        component: resolve("src/templates/item.tsx"),
+        context: {
+          id: item.id,
+          title: item?.title,
+          price: item?.price,
+          last_price: item?.last_price,
+          image: item?.image,
+          description: item?.description,
+          spec: item?.spec,
+          meta_description: item?.meta_description,
+          meta_title: item?.meta_title,
+          meta_keywords: item?.meta_keywords,
+        },
+      });
     });
   } catch (error) {
     console.error(error);

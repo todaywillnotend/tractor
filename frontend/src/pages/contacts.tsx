@@ -18,4 +18,4 @@ const ContactsPage: React.FC<PageProps> = () => {
 
 export default ContactsPage;
 
-export const Head: HeadFC = () => <title>Контакты</title>;
+export const Head: HeadFC = () => <title>ТракторСтрой - Контакты</title>;

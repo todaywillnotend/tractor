@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import cn from "classnames";
+import { Link } from "gatsby";
 
 import { Title } from "../Title/Title";
 import { formatPrice } from "../../utils";
@@ -59,6 +60,7 @@ export const Cart: React.FC = () => {
       <Title text="Корзина" align="center" />
       {step === ECartStep.INIT && (
         <div className="cart-empty">
+          <h3 className="cart-empty__title">Тут пока пусто :(</h3>
           <img
             className="cart-empty__image"
             src="/empty.jpg"
@@ -89,11 +91,19 @@ export const Cart: React.FC = () => {
                   >
                     <img src={IconTrash} alt="" />
                   </button>
-                  <div className="catalog-item__image">
+                  <Link
+                    to={`/catalog/${item.id}`}
+                    className="catalog-item__image"
+                  >
                     <img src={item.image} alt={item.title} />
-                  </div>
+                  </Link>
                   <div className="catalog-item__container">
-                    <p className="catalog-item__title">{item.title}</p>
+                    <Link
+                      to={`/catalog/${item.id}`}
+                      className="catalog-item__title"
+                    >
+                      {item.title}
+                    </Link>
                     <div className="catalog-item__price">
                       {item.last_price && (
                         <div className="catalog-item__price_old">

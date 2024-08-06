@@ -47,13 +47,13 @@ services:
       context: ./backend
       dockerfile: Dockerfile.prod
     volumes:
-      - ./config:/opt/backend/config
-      - ./src:/opt/backend/src
-      - ./package.json:/opt/package.json
-      - ./yarn.lock:/opt/yarn.lock
-      - ./.env:/opt/backend/.env
-      - ./public/uploads:/opt/backend/public/uploads
-      - ./.tmp:/opt/backend/.tmp
+      - ./backend/config:/opt/backend/config
+      - ./backend/src:/opt/backend/src
+      - ./backend/package.json:/opt/package.json
+      - ./backend/yarn.lock:/opt/yarn.lock
+      - ./backend/.env:/opt/backend/.env
+      - ./backend/public/uploads:/opt/backend/public/uploads
+      - ./backend/.tmp:/opt/backend/.tmp
     networks:
       - app-network
     environment:
