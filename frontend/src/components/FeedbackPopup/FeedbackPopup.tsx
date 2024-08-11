@@ -34,7 +34,6 @@ export const FeedbackPopup: React.FC<IFeedbackPopup> = ({
           title={title}
           subtitle={subtitle}
           withMessage
-          onCloseClick={() => setIsOpen(false)}
         />
       </div>
     </ModalWindow>

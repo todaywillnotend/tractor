@@ -28,7 +28,7 @@ RUN yarn cache clean
 COPY . .
 
 # Run cronjob script to rebuild the page periodically and serve via express
-CMD pm2 start ./scripts/cronjob.js --no-autorestart --instances 1 --cron "0 0 * * *" ./scripts/server.js && pm2 logs
+CMD pm2 start ./scripts/server.js && pm2 logs
 
 # Expose express server
 EXPOSE 3000

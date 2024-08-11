@@ -17,7 +17,6 @@ interface IForm {
   subtitle?: string;
   withMessage?: boolean;
   withEmail?: boolean;
-  onCloseClick?: () => void;
   onSuccess?: () => void;
   cart?: number[];
 }
@@ -28,7 +27,6 @@ export const Form: React.FC<IForm> = ({
   withMessage = false,
   withEmail = true,
   onSuccess,
-  onCloseClick,
   cart = [],
 }) => {
   const [formData, setFormData] = useState<TFormData>({
@@ -38,10 +36,10 @@ export const Form: React.FC<IForm> = ({
     message: "",
     cart,
   });
-  const [privacy, setPrivacy] = useState(false);
+  const [privacy, setPrivacy] = useState(true);
 
   const isButtonEnabled = Boolean(
-    formData.phone.length >= 10 && formData.phone.length < 13 && privacy,
+    formData.phone.length >= 10 && formData.phone.length < 13 && privacy
   );
   const [isSuccess, setIsSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -190,18 +188,9 @@ export const Form: React.FC<IForm> = ({
                   <a href="/privacy" className="privacy-link" target="_blank">
                     Политикой&#160;конфиденциальности
                   </a>
-                    .
+                  .
                 </label>
                 <div className="form__buttons">
-                  {onCloseClick && (
-                    <button
-                      type="submit"
-                      className="form__button"
-                      onClick={onCloseClick}
-                    >
-                      Отмена
-                    </button>
-                  )}
                   <button
                     type="submit"
                     className="form__button"
