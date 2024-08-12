@@ -155,7 +155,7 @@ export const Form: React.FC<IForm> = ({
                   value={formData.phone}
                   type="tel"
                   placeholder="Контактный телефон"
-                  className="form__input"
+                  className="form__input form__input_required"
                   onChange={(event) =>
                     setFormData((prev) => ({
                       ...prev,

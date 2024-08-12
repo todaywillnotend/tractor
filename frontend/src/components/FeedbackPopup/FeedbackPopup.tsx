@@ -3,6 +3,8 @@ import { ModalWindow } from "../ModalWindow/ModalWindow";
 import { Form } from "../Form/Form";
 
 import "./FeedbackPopup.scss";
+import { useLocalStorageData } from "../../hooks/useLocalStorageData";
+import { SHOW_PRICE_LOCAL_STORAGE_KEY } from "../../const";
 
 interface IFeedbackPopup {
   title?: string;
@@ -21,6 +23,10 @@ export const FeedbackPopup: React.FC<IFeedbackPopup> = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
+  const [showPriceId, _setShowPriceId] = useLocalStorageData<
+    number | undefined
+  >(SHOW_PRICE_LOCAL_STORAGE_KEY, undefined);
+
   return (
     <ModalWindow
       renderButton={renderButton}
@@ -34,6 +40,7 @@ export const FeedbackPopup: React.FC<IFeedbackPopup> = ({
           title={title}
           subtitle={subtitle}
           withMessage
+          cart={showPriceId ? [showPriceId] : []}
         />
       </div>
     </ModalWindow>

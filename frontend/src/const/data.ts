@@ -31,3 +31,4 @@ export const clock = {
 };
 
 export const CART_LOCAL_STORAGE_KEY = "cartLocalStorageKey";
+export const SHOW_PRICE_LOCAL_STORAGE_KEY = "showPriceLocalStorageKey";

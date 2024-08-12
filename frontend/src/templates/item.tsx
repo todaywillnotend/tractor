@@ -17,7 +17,7 @@ const CatalogPage: React.FC<PageProps> = ({
     spec?: { key: string; value: string }[];
   };
 }) => {
-  if (!id || !title || !price || !image) return null;
+  if (!id || !title || !image) return null;
 
   return (
     <main className="mainWrapper">

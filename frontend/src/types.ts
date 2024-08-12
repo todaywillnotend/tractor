@@ -1,7 +1,7 @@
 export type TItem = {
   id: number;
   title: string;
-  price: number;
+  price?: number;
   last_price?: number;
   image: string;
   description?: string;
@@ -13,7 +13,7 @@ export type TItem = {
 
 export type TItemResponse = {
   title: string;
-  price: number;
+  price?: number;
   last_price?: number;
   image: TDataSignle<{ url: string }>;
   description?: string;

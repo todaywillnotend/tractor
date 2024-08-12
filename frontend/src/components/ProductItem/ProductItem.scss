@@ -7,6 +7,10 @@
   display: flex;
   justify-content: center;
 
+  .catalog-item__button {
+    margin-top: unset;
+  }
+
   &__container {
     @include container;
   }

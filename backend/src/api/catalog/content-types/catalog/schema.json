@@ -18,7 +18,7 @@
     },
     "price": {
       "type": "integer",
-      "required": true
+      "required": false
     },
     "last_price": {
       "type": "integer"

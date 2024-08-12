@@ -1,11 +1,15 @@
 import React from "react";
 import cn from "classnames";
 import { useLocalStorageData } from "../../hooks/useLocalStorageData";
-import { CART_LOCAL_STORAGE_KEY } from "../../const";
+import {
+  CART_LOCAL_STORAGE_KEY,
+  SHOW_PRICE_LOCAL_STORAGE_KEY,
+} from "../../const";
 // @ts-ignore
 import IconDone from "./../../images/icon-done.svg";
 // @ts-ignore
 import ShoppingCartOrangeIcon from "./../../images/shopping_cart_orange.svg";
+import { FeedbackPopup } from "../FeedbackPopup/FeedbackPopup";
 import { formatPrice } from "../../utils";
 
 import "./ProductItem.scss";
@@ -13,7 +17,7 @@ import "./ProductItem.scss";
 interface IProductItem {
   id: number;
   title: string;
-  price: number;
+  price?: number;
   last_price?: number;
   image: string;
   description?: string;
@@ -34,6 +38,11 @@ export const ProductItem: React.FC<IProductItem> = ({
     []
   );
 
+  const [_showPriceId, setShowPriceId] = useLocalStorageData<number | "">(
+    SHOW_PRICE_LOCAL_STORAGE_KEY,
+    ""
+  );
+
   const addToCart = (id: number) => {
     if (cart.includes(id)) {
       setCart(cart.filter((el) => el !== id));
@@ -41,6 +50,10 @@ export const ProductItem: React.FC<IProductItem> = ({
     }
 
     setCart([...cart, id]);
+  };
+
+  const onClickButtonShowPrice = (id: number) => {
+    setShowPriceId(id);
   };
 
   const isAddedElement = cart.includes(id);
@@ -54,16 +67,37 @@ export const ProductItem: React.FC<IProductItem> = ({
             <img src={image} alt={title} />
           </div>
           <div className="product-item__action">
-            <div className="catalog-item__price">
-              {last_price && (
-                <div className="catalog-item__price_old">
-                  {formatPrice(last_price)}
+            {!price && (
+              <FeedbackPopup
+                title="Узнать цену"
+                subtitle="Отправьте форму и мы позвоним вам в ближайшее время"
+                renderButton={({ openModal }) => (
+                  <button
+                    className={cn(
+                      "catalog-item__price catalog-item__price-button"
+                    )}
+                    onClick={() => {
+                      onClickButtonShowPrice(id);
+                      openModal();
+                    }}
+                  >
+                    Узнать цену
+                  </button>
+                )}
+              />
+            )}
+            {price && (
+              <div className="catalog-item__price">
+                {last_price && (
+                  <div className="catalog-item__price_old">
+                    {formatPrice(last_price)}
+                  </div>
+                )}
+                <div className="catalog-item__price_new">
+                  {formatPrice(price)}
                 </div>
-              )}
-              <div className="catalog-item__price_new">
-                {formatPrice(price)}
               </div>
-            </div>
+            )}
             <button
               className={cn("catalog-item__button", {
                 "catalog-item__button_added": isAddedElement,

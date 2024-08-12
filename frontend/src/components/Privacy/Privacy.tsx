@@ -1,10 +1,10 @@
-import React from 'react';
+import React from "react";
 
 import "./Privacy.scss";
 
 export const Privacy: React.FC = () => {
   return (
-    <div className='privacy'>
+    <div className="privacy">
       <div className="privacy__container">
         <div
           className="col"
@@ -36,7 +36,7 @@ export const Privacy: React.FC = () => {
                     id="owner-name-value"
                     data-scroll-to="#owner-name-field"
                   >
-                    Марзиевым Ахмедом Микаиловичем
+                    ООО "Торговый Дом Волжский Трактор"
                   </span>{" "}
                   (далее&nbsp;— Оператор).
                 </div>

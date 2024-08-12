@@ -71,15 +71,6 @@ module.exports = {
       if (!text) return;
 
       try {
-        console.log("Отправка письма");
-        await strapi.plugins["email"].services.email.send({
-          from: "onboarding@resend.dev",
-          to: process.env.RESEND_EMAIL,
-          subject: "Новый заказ",
-          html: text,
-          text: text,
-        });
-
         console.log("Отправка сообщения в тг");
         await fetch(
           `${process.env.BACKEND_URL}/telegram-bot-strapi/send-message`,
@@ -92,6 +83,19 @@ module.exports = {
             body: JSON.stringify({ message: text.replace(/<[^>]*>/g, "") }),
           }
         );
+      } catch (error) {
+        console.error(error);
+      }
+
+      try {
+        console.log("Отправка письма");
+        await strapi.plugins["email"].services.email.send({
+          from: "onboarding@resend.dev",
+          to: process.env.RESEND_EMAIL,
+          subject: "Новый заказ",
+          html: text,
+          text: text,
+        });
       } catch (error) {
         console.error(error);
       }

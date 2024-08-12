@@ -127,7 +127,31 @@
     }
   }
 
+  &__price-button {
+    margin-top: auto;
+    height: 44px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+
+    transition: all 0.2s;
+    background-color: transparent;
+    border: 1px solid $orangeLight;
+    color: black;
+    width: 120px;
+
+    &:hover {
+      background-color: $orangeDark;
+      color: white;
+    }
+  }
+
   &__button {
+    margin-top: auto;
     grid-area: c;
     cursor: pointer;
 

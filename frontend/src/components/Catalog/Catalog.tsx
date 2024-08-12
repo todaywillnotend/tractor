@@ -10,6 +10,7 @@ import {
   CART_LOCAL_STORAGE_KEY,
   MAX_ITEMS_COUNT,
   navigationItems,
+  SHOW_PRICE_LOCAL_STORAGE_KEY,
 } from "../../const";
 import { CommonContext } from "../../context/CommonContext";
 import { formatPrice } from "../../utils";
@@ -18,6 +19,7 @@ import { useLocalStorageData } from "../../hooks/useLocalStorageData";
 import IconDone from "./../../images/icon-done.svg";
 // @ts-ignore
 import ShoppingCartOrangeIcon from "./../../images/shopping_cart_orange.svg";
+import { FeedbackPopup } from "../FeedbackPopup/FeedbackPopup";
 
 interface ICatalog {
   isCatalogPage?: boolean;
@@ -34,6 +36,11 @@ export const Catalog: React.FC<ICatalog> = ({ isCatalogPage = false }) => {
     []
   );
 
+  const [_showPriceId, setShowPriceId] = useLocalStorageData<number | "">(
+    SHOW_PRICE_LOCAL_STORAGE_KEY,
+    ""
+  );
+
   const [page, setPage] = useState(1);
 
   const addToCart = (id: number) => {
@@ -43,6 +50,10 @@ export const Catalog: React.FC<ICatalog> = ({ isCatalogPage = false }) => {
     }
 
     setCart([...cart, id]);
+  };
+
+  const onClickButtonShowPrice = (id: number) => {
+    setShowPriceId(id);
   };
 
   const onButtonClick = () => {
@@ -82,16 +93,37 @@ export const Catalog: React.FC<ICatalog> = ({ isCatalogPage = false }) => {
                   >
                     {item.title}
                   </Link>
-                  <div className="catalog-item__price">
-                    {item.last_price && (
-                      <div className="catalog-item__price_old">
-                        {formatPrice(item.last_price)}
+                  {item.price && (
+                    <div className="catalog-item__price">
+                      {item.last_price && (
+                        <div className="catalog-item__price_old">
+                          {formatPrice(item.last_price)}
+                        </div>
+                      )}
+                      <div className="catalog-item__price_new">
+                        {formatPrice(item.price)}
                       </div>
-                    )}
-                    <div className="catalog-item__price_new">
-                      {formatPrice(item.price)}
                     </div>
-                  </div>
+                  )}
+                  {!item.price && (
+                    <FeedbackPopup
+                      title="Узнать цену"
+                      subtitle="Отправьте форму и мы свяжемся с Вами в ближайшее время"
+                      renderButton={({ openModal }) => (
+                        <button
+                          className={cn(
+                            "catalog-item__price catalog-item__price-button"
+                          )}
+                          onClick={() => {
+                            onClickButtonShowPrice(item.id);
+                            openModal();
+                          }}
+                        >
+                          Узнать цену
+                        </button>
+                      )}
+                    />
+                  )}
                   <button
                     className={cn("catalog-item__button", {
                       "catalog-item__button_added": isAddedElement,

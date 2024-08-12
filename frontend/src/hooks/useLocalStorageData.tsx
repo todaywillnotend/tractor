@@ -21,6 +21,8 @@ export function useLocalStorageData<T>(
 
   const [data, setData] = useState<T>(initialData);
 
+  const eventName = `localUpdated${key}`;
+
   useEffect(() => {
     const handleStorageChange = (
       e: StorageEvent & { detail: { key: string; value: string } }
@@ -37,18 +39,18 @@ export function useLocalStorageData<T>(
       }
     };
     // @ts-ignore
-    document.addEventListener("localUpdated", handleStorageChange);
+    document.addEventListener(eventName, handleStorageChange);
 
     return () => {
       // @ts-ignore
-      document.removeEventListener("localUpdated", handleStorageChange);
+      document.removeEventListener(eventName, handleStorageChange);
     };
   }, [key, initialData]);
 
   const setLocalStorageData = (value: T) => {
     localStorage.setItem(key, JSON.stringify(value));
 
-    const event = new CustomEvent("localUpdated", {
+    const event = new CustomEvent(eventName, {
       detail: {
         key,
         value: JSON.stringify(value),

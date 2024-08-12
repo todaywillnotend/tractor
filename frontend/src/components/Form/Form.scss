@@ -102,7 +102,12 @@
     height: 37px;
     border: unset;
     border-radius: 0;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid $gray;
+
+    &_required {
+      border-bottom: 1px solid $orangeDark;
+    }
+
     color: rgba(0, 0, 0, 0.5);
     padding: 10px 20px;
     outline: none;
