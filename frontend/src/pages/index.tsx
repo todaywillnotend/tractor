@@ -8,12 +8,14 @@ import { Contacts } from "../components/Contacts/Contacts";
 import { PhotoGallery } from "../components/PhotoGallery/PhotoGallery";
 import { Form } from "../components/Form/Form";
 import { Footer } from "../components/Footer/Footer";
+import { Leasing } from "../components/Leasing/Leasing";
 
 const IndexPage: React.FC<PageProps> = () => {
   return (
     <main className="mainWrapper">
       <Header />
       <Main />
+      <Leasing />
       <Catalog />
       <Features />
       <Contacts />
@@ -48,7 +50,7 @@ export const Head: HeadFC = () => (
       property="og:image"
       content={`${process.env.GATSBY_FRONTEND_URL}/tractor.png`}
     />
-    <meta property="og:url" content={process.env.GATSBY_FRONTEND_URL}></meta>
+    <meta property="og:url" content={process.env.GATSBY_FRONTEND_URL} />
     <meta
       property="og:description"
       content="Интернет-магазин по продаже сельхозтехники и различного сельскохозяйственного оборудования. У нас Вы можете купить сельхозтехнику: трактора, бульдозер"

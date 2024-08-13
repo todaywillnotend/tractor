@@ -36,6 +36,10 @@ export const Cart: React.FC = () => {
   const cartAmount = useMemo(() => {
     return formatPrice(
       cartItems.reduce((acc, cur) => {
+        if (!cur.price) {
+          return acc;
+        }
+
         return acc + cur.price;
       }, 0)
     );
@@ -110,9 +114,11 @@ export const Cart: React.FC = () => {
                           {formatPrice(item.last_price)}
                         </div>
                       )}
-                      <div className="catalog-item__price_new">
-                        {formatPrice(item.price)}
-                      </div>
+                      {item.price && (
+                        <div className="catalog-item__price_new">
+                          {formatPrice(item.price)}
+                        </div>
+                      )}
                     </div>
                     <button
                       className={cn("catalog-item__button", {

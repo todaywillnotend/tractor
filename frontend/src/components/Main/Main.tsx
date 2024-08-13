@@ -18,7 +18,6 @@ export const Main: React.FC = () => {
             />
           </div>
           <div className="main__block">
-            <p className="main__price">От 2 500 000 рублей</p>
             <p className="main__subtitle">
               Не упустите возможность приобрести доступный и надежный трактор по
               выгодной цене. Свяжитесь с нами сегодня, чтобы получить полную

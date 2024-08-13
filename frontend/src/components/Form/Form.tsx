@@ -15,6 +15,7 @@ type TFormData = {
 interface IForm {
   title?: string;
   subtitle?: string;
+  message?: string;
   withMessage?: boolean;
   withEmail?: boolean;
   onSuccess?: () => void;
@@ -24,6 +25,7 @@ interface IForm {
 export const Form: React.FC<IForm> = ({
   title,
   subtitle,
+  message,
   withMessage = false,
   withEmail = true,
   onSuccess,
@@ -33,7 +35,7 @@ export const Form: React.FC<IForm> = ({
     name: "",
     email: "",
     phone: "",
-    message: "",
+    message: message || "",
     cart,
   });
   const [privacy, setPrivacy] = useState(true);

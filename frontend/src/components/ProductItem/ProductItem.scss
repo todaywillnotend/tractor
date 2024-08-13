@@ -53,6 +53,12 @@
     border-radius: 10px;
     padding: 20px 10px;
 
+    display: flex;
+    justify-content: center;
+    max-height: 400px;
+    box-sizing: border-box;
+    overflow: hidden;
+
     @include desktop {
       margin-top: 0;
       grid-area: a;
@@ -64,12 +70,12 @@
     }
 
     img {
+      max-height: 100%;
       max-width: 100%;
       border-radius: 10px;
 
       @include desktop {
-        max-width: unset;
-        width: 500px;
+        max-width: 500px;
       }
     }
   }
