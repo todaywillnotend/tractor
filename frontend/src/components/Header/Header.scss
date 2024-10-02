@@ -252,6 +252,7 @@ $animationStep2Delay: $animationStep1Delay + $animationStep2;
 }
 
 .shopping-cart {
+  border-radius: 10px;
   display: flex;
   justify-content: center;
   align-items: center;

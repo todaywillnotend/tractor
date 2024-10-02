@@ -72,6 +72,9 @@
   background-color: $white;
   width: 100%;
 
+  border-radius: 10px;
+  overflow: hidden;
+
   @include tablet {
     max-width: 345px;
   }
@@ -143,9 +146,11 @@
     border: 1px solid $orangeLight;
     color: black;
     width: 120px;
+    border-radius: 10px;
 
     &:hover {
-      background-color: $orangeDark;
+      border: 1px solid $borderGray;
+      background-color: $blue;
       color: white;
     }
   }
@@ -168,6 +173,8 @@
     justify-content: center;
     font-size: 14px;
 
+    border-radius: 10px;
+
     @include mobile320 {
       width: 120px;
       font-size: 12px;
@@ -181,6 +188,7 @@
       &:hover {
         background-color: unset !important;
         color: $black !important;
+        border: 1px solid $green !important;
 
         img {
           display: block !important;
@@ -189,7 +197,8 @@
     }
 
     &:hover {
-      background-color: $orangeDark;
+      border: 1px solid $borderGray;
+      background-color: $blue;
       color: $white;
 
       img {

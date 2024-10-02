@@ -7,6 +7,61 @@
   display: flex;
   justify-content: center;
 
+  .image-gallery {
+    width: 100%;
+
+    &-slide-wrapper {
+      border: 2px solid rgba($orangeLight, 0.2);
+      border-radius: 10px;
+    }
+
+    &-thumbnails {
+      border: 2px solid rgba($orangeLight, 0.2);
+      border-radius: 10px;
+      margin-top: 5px;
+    }
+
+    &-slides {
+      background-color: $gray;
+    }
+
+    &-image {
+      height: 250px !important;
+      box-sizing: border-box;
+      background-color: $gray;
+
+      @include desktop {
+        height: 390px !important;
+      }
+    }
+
+    &-thumbnail {
+      box-sizing: border-box;
+      border-radius: 10px;
+
+      &:hover {
+        border: 3px solid $orangeLight;
+      }
+    }
+
+    .image-gallery-thumbnail.active {
+      border: 3px solid $orangeDark;
+    }
+
+    &-content.fullscreen {
+      .image-gallery-image {
+        height: unset !important;
+        width: 100%;
+        max-width: unset !important;
+        max-height: calc(100vh - 180px) !important;
+      }
+
+      .image-gallery-slides {
+        background-color: unset !important;
+      }
+    }
+  }
+
   .catalog-item__button {
     margin-top: unset;
   }
@@ -20,9 +75,9 @@
 
     @include desktop {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr 50%;
       grid-template-rows: auto;
-      gap: 0 90px;
+      gap: 0 50px;
       grid-template-areas:
         "a b"
         "a c"
@@ -49,14 +104,8 @@
   &__image {
     margin-top: 31px;
     padding: 0 20px;
-    border: 2px solid rgba($orangeDark, 0.2);
-    border-radius: 10px;
-    padding: 20px 10px;
-
     display: flex;
     justify-content: center;
-    max-height: 400px;
-    box-sizing: border-box;
     overflow: hidden;
 
     @include desktop {
@@ -66,7 +115,6 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 400px;
     }
 
     img {

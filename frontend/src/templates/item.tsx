@@ -5,7 +5,16 @@ import { Footer } from "../components/Footer/Footer";
 import { ProductItem } from "../components/ProductItem/ProductItem";
 
 const CatalogPage: React.FC<PageProps> = ({
-  pageContext: { id, title, price, last_price, image, description, spec },
+  pageContext: {
+    id,
+    title,
+    price,
+    last_price,
+    image,
+    images = [],
+    description,
+    spec,
+  },
 }: {
   pageContext: {
     id?: number;
@@ -13,6 +22,7 @@ const CatalogPage: React.FC<PageProps> = ({
     price?: number;
     last_price?: number;
     image?: string;
+    images?: { original: string; thumbnail: string }[];
     description?: string;
     spec?: { key: string; value: string }[];
   };
@@ -28,6 +38,7 @@ const CatalogPage: React.FC<PageProps> = ({
         price={price}
         last_price={last_price}
         image={image}
+        images={images}
         description={description}
         spec={spec}
       />

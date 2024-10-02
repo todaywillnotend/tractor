@@ -16,7 +16,7 @@ COPY yarn.lock ./
 RUN apk add --no-cache python3 make g++ && apk add vips-dev fftw-dev --update-cache && rm -fR /var/cache/apk/*
 
 RUN yarn config set network-timeout 1000000 -g 
-RUN yarn install --frozen-lockfile --no-cache
+RUN yarn install --no-cache
 
 # Copy sourcecode files
 COPY . .

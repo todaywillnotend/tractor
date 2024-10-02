@@ -1,8 +1,5 @@
 import React, { PropsWithChildren, useEffect, useMemo, useState } from "react";
-import {
-  TItem,
-  TPhoto,
-} from "../types";
+import { TItem, TPhoto } from "../types";
 import { getCatalogItems, getPhotos } from "../api";
 import CookieConsent from "react-cookie-consent";
 
@@ -32,7 +29,9 @@ const CommonContextProvider = (props: PropsWithChildren) => {
     },
     actions: {
       getCatalogItems: async (page: number) => {
-        const {data: catalogDataForPage, hasMorePage } = await getCatalogItems(page);
+        const { data: catalogDataForPage, hasMorePage } = await getCatalogItems(
+          page
+        );
 
         setState((prev) => ({
           ...prev,
@@ -48,7 +47,7 @@ const CommonContextProvider = (props: PropsWithChildren) => {
 
   useEffect(() => {
     (async () => {
-       const { data: catalogData, hasMorePage } = await getCatalogItems(1);
+      const { data: catalogData, hasMorePage } = await getCatalogItems(1);
       const photosData = await getPhotos();
 
       setState((prev) => ({

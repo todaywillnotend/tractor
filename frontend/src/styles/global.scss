@@ -2,6 +2,8 @@
 // Шрифты
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&display=swap");
+// Слайдер
+@import "~react-image-gallery/styles/scss/image-gallery.scss";
 
 button {
   color: black;
@@ -23,9 +25,15 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  overflow: hidden;
 }
 
 .footerWrapper {
   margin-top: auto;
   width: 100%;
+}
+
+.modal-window__close {
+  z-index: 100;
+  background-color: transparent !important;
 }

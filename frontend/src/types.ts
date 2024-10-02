@@ -4,6 +4,10 @@ export type TItem = {
   price?: number;
   last_price?: number;
   image: string;
+  images: {
+    original: string;
+    thumbnail: string;
+  }[];
   description?: string;
   spec?: { key: string; value: string }[];
   meta_title?: string;
@@ -15,7 +19,11 @@ export type TItemResponse = {
   title: string;
   price?: number;
   last_price?: number;
-  image: TDataSignle<{ url: string }>;
+  image: TDataSignle<{ url: string; formats: { thumbnail: { url: string } } }>;
+  images: TDataCollection<{
+    url: string;
+    formats: { thumbnail: { url: string } };
+  }>;
   description?: string;
   spec?: { key: string; value: string }[];
   meta_title?: string;

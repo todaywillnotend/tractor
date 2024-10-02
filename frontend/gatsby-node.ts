@@ -10,6 +10,10 @@ const formatCatalogData = (
     ...(item?.attributes || {}),
     id: item.id,
     image: `${process.env.GATSBY_BACKEND_URL}${item?.attributes?.image?.data?.attributes?.url}`,
+    images: item?.attributes?.images?.data?.map((el) => ({
+      original: `${process.env.GATSBY_BACKEND_URL}${el?.attributes?.url}`,
+      thumbnail: `${process.env.GATSBY_BACKEND_URL}${el?.attributes?.formats?.thumbnail?.url}`,
+    })),
   }));
 };
 
@@ -93,6 +97,7 @@ const createPages: GatsbyNode["createPages"] = async ({ actions, graphql }) => {
           price: item?.price,
           last_price: item?.last_price,
           image: item?.image,
+          images: item?.images,
           description: item?.description,
           spec: item?.spec,
           meta_description: item?.meta_description,

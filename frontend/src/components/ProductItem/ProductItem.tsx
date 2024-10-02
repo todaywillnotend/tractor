@@ -1,5 +1,6 @@
 import React from "react";
 import cn from "classnames";
+import ImageGallery from "react-image-gallery";
 import { useLocalStorageData } from "../../hooks/useLocalStorageData";
 import {
   CART_LOCAL_STORAGE_KEY,
@@ -20,6 +21,7 @@ interface IProductItem {
   price?: number;
   last_price?: number;
   image: string;
+  images: { original: string; thumbnail: string }[];
   description?: string;
   spec?: { key: string; value: string }[];
 }
@@ -30,6 +32,7 @@ export const ProductItem: React.FC<IProductItem> = ({
   price,
   last_price,
   image,
+  images,
   description,
   spec,
 }) => {
@@ -58,13 +61,24 @@ export const ProductItem: React.FC<IProductItem> = ({
 
   const isAddedElement = cart.includes(id);
 
+  const allImages = [{ original: image, thumbnail: image }, ...(images || [])];
+
   return (
     <section className="product-item">
       <div className="product-item__container">
         <div className="product-item__content">
           <h1 className="product-item__title">{title}</h1>
           <div className="product-item__image">
-            <img src={image} alt={title} />
+            {allImages && (
+              <ImageGallery
+                showFullscreenButton
+                useBrowserFullscreen
+                showPlayButton={false}
+                showNav={false}
+                thumbnailPosition="bottom"
+                items={allImages}
+              />
+            )}
           </div>
           <div className="product-item__action">
             {!price && (
