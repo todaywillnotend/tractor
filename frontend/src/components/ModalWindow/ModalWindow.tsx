@@ -4,7 +4,7 @@ import cn from "classnames";
 // @ts-ignore
 import IconClose from "./../../images/icon-close.svg";
 
-import "./ModalWindow.scss";
+import * as styles from "./ModalWindow.module.scss";
 
 interface IModalWindow {
   isModalOpen?: boolean;
@@ -35,19 +35,19 @@ export const ModalWindow: React.FC<IModalWindow & PropsWithChildren> = ({
   };
 
   return (
-    <div className={cn("modal-window", className)}>
+    <div className={cn(styles.wrapper, className)}>
       {renderButton ? (
         renderButton({ openModal })
       ) : (
         <button onClick={openModal}>Open Modal</button>
       )}
       <Modal
-        className="modal-window__modal"
-        overlayClassName="modal-window__overlay"
+        className={styles.modal}
+        overlayClassName={styles.overlay}
         isOpen={isModalOpen !== undefined ? isModalOpen : isOpen}
         onRequestClose={closeModal}
       >
-        <button onClick={closeModal} className="modal-window__close">
+        <button onClick={closeModal} className={styles.close}>
           <img src={IconClose} alt="" />
         </button>
         {children}

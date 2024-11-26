@@ -11,7 +11,7 @@ import { CART_LOCAL_STORAGE_KEY } from "../../const";
 import IconTrash from "./../../images/icon-trash.svg";
 import { Form } from "../Form/Form";
 
-import "./Cart.scss";
+import * as styles from "./Cart.module.scss";
 
 enum ECartStep {
   INIT = "INIT",
@@ -60,69 +60,66 @@ export const Cart: React.FC = () => {
   };
 
   return (
-    <section className="cart">
+    <section className={styles.cart}>
       <Title text="Корзина" align="center" />
       {step === ECartStep.INIT && (
-        <div className="cart-empty">
-          <h3 className="cart-empty__title">Тут пока пусто :(</h3>
+        <div className={styles.empty}>
+          <h3>Тут пока пусто :(</h3>
           <img
-            className="cart-empty__image"
+            className={styles.emptyImage}
             src="/empty.jpg"
             alt="Корзина пуста"
           />
         </div>
       )}
       {step === ECartStep.CART && (
-        <div className="cart__container">
-          <div className="cart-result">
-            <p className="cart-result__title">Итог: {cartAmount}</p>
+        <div className={styles.container}>
+          <div className={styles.result}>
+            <p className={styles.resultTitle}>Итог: {cartAmount}</p>
             <button
-              className="cart-result__button"
+              className={styles.resultButton}
               onClick={() => setStep(ECartStep.FORM)}
             >
               Продолжить
             </button>
           </div>
-          <div className="catalog__items">
+          <div className={styles.items}>
             {(cartItems || []).map((item) => {
               const idAddedElement = cart.includes(item.id);
 
               return (
-                <div className="catalog__item catalog-item">
+                <div className={styles.item}>
                   <button
-                    className="button-trash"
+                    className={styles.itemButtonTrash}
                     onClick={() => setCart(cart.filter((el) => el !== item.id))}
                   >
                     <img src={IconTrash} alt="" />
                   </button>
-                  <Link
-                    to={`/catalog/${item.id}`}
-                    className="catalog-item__image"
-                  >
+                  <Link to={`/catalog/${item.id}`} className={styles.itemImage}>
                     <img src={item.image} alt={item.title} />
                   </Link>
-                  <div className="catalog-item__container">
+                  <div className={styles.itemContainer}>
                     <Link
                       to={`/catalog/${item.id}`}
-                      className="catalog-item__title"
+                      className={styles.itemTitle}
                     >
                       {item.title}
                     </Link>
-                    <div className="catalog-item__price">
+                    <div className={styles.itemPrice}>
                       {item.last_price && (
-                        <div className="catalog-item__price_old">
+                        <div className={styles.itemPriceOld}>
                           {formatPrice(item.last_price)}
                         </div>
                       )}
                       {item.price && (
-                        <div className="catalog-item__price_new">
+                        <div className={styles.itemPriceNew}>
                           {formatPrice(item.price)}
                         </div>
                       )}
                     </div>
                     <button
-                      className={cn("catalog-item__button", {
-                        "catalog-item__button_added": idAddedElement,
+                      className={cn(styles.itemButton, {
+                        [styles.itemButtonAdded]: idAddedElement,
                       })}
                       disabled
                     >
@@ -136,7 +133,7 @@ export const Cart: React.FC = () => {
         </div>
       )}
       {step === ECartStep.FORM && (
-        <div className="cart__form">
+        <div className={styles.form}>
           <Form cart={cart} title="" subtitle="" onSuccess={onFormSend} />
         </div>
       )}

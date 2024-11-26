@@ -8,9 +8,9 @@ export const tel = {
 
 export const mail = {
   text: "Почта",
-  href: "mailto:htz34@yandex.ru",
+  href: "mailto:tdvt35@mail.ru",
   icon: "/icon-mail.svg",
-  title: "htz34@yandex.ru",
+  title: "tdvt35@mail.ru",
   subtitle: "Главный менеджер отдела - Кап.ремонт Т-150",
 };
 

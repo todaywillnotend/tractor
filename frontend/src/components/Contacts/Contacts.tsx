@@ -1,37 +1,37 @@
 import React from "react";
 import { Title } from "../Title/Title";
 
-import "./Contacts.scss";
+import * as styles from "./Contacts.module.scss";
 import { clock, mail, tel, time } from "../../const";
 
 const contactsData = [tel, mail, time, clock];
 
 export const Contacts: React.FC = () => {
   return (
-    <section className="contacts">
-      <div className="contacts__container">
+    <section className={styles.contacts}>
+      <div className={styles.container}>
         <Title align="right" text="Контакты" />
 
-        <div className="contacts__content">
-          <div className="contacts__texts">
-            {contactsData.map((item) => {
+        <div className={styles.content}>
+          <div className={styles.texts}>
+            {contactsData.map((item, index) => {
               return (
-                <div className="contacts__item contacts-item">
-                  <div className="contacts-item__top">
-                    <div className="contacts-item__image">
+                <div key={index} className={styles.item}>
+                  <div className={styles.itemTop}>
+                    <div className={styles.itemImage}>
                       <img src={item.icon} alt={item.text} />
                     </div>
-                    <p className="contacts-item__text">{item.text}</p>
+                    <p className={styles.itemText}>{item.text}</p>
                   </div>
-                  <a className="contacts-item__title" href={item.href}>
+                  <a className={styles.itemTitle} href={item.href}>
                     {item.title}
                   </a>
-                  <p className="contacts-item__subtitle">{item.subtitle}</p>
+                  <p className={styles.itemSubtitle}>{item.subtitle}</p>
                 </div>
               );
             })}
           </div>
-          <div className="contacts__map">
+          <div className={styles.map}>
             <iframe
               src="https://yandex.ru/map-widget/v1/?um=constructor%3A485d47d0bf289ce1402c84e87d2261387abab8563743c73b78fb7c5cc6d3e8d7&amp;source=constructor"
               width="500"

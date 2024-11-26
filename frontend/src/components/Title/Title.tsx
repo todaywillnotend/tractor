@@ -1,7 +1,7 @@
 import React from "react";
 import cn from "classnames";
 
-import "./Title.scss";
+import * as styles from "./Title.module.scss";
 
 interface ITitle {
   text: string;
@@ -9,5 +9,7 @@ interface ITitle {
 }
 
 export const Title: React.FC<ITitle> = ({ text, align = "left" }) => {
-  return <h2 className={cn("title", { [`title_${align}`]: align })}>{text}</h2>;
+  return (
+    <h2 className={cn(styles.title, { [styles[align]]: align })}>{text}</h2>
+  );
 };

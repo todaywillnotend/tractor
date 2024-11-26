@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { ModalWindow } from "../ModalWindow/ModalWindow";
 import { Form } from "../Form/Form";
 
-import "./FeedbackPopup.scss";
+import * as styles from "./FeedbackPopup.module.scss";
 import { useLocalStorageData } from "../../hooks/useLocalStorageData";
 import { SHOW_PRICE_LOCAL_STORAGE_KEY } from "../../const";
 
@@ -36,7 +36,7 @@ export const FeedbackPopup: React.FC<IFeedbackPopup> = ({
       isModalOpen={isOpen}
       setIsModalOpen={(value) => setIsOpen(value)}
     >
-      <div className="feedback-popup">
+      <div className={styles.feedback}>
         <Form
           message={message}
           withEmail={withEmail}

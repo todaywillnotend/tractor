@@ -13,58 +13,60 @@
     background-position: right top;
     margin-top: 130px;
   }
+}
 
-  &__container {
-    @include container;
-    flex-direction: column;
-    align-items: center;
+.container {
+  @include container;
+  flex-direction: column;
+  align-items: center;
+}
+
+.items {
+  margin-top: 24px;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+
+  max-width: 100%;
+}
+
+.button {
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 280px;
+  height: 41px;
+  margin-top: 40px;
+
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+  background-color: transparent;
+  box-sizing: border-box;
+  border: none;
+
+  color: black;
+  text-decoration: unset;
+
+  @include desktop {
+    width: 345px;
+    height: 57px;
+    border: 2px solid $orangeDark;
+
+    margin-top: 80px;
   }
 
-  &__items {
-    margin-top: 24px;
-
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-
-    max-width: 100%;
-  }
-
-  &__button {
-    cursor: pointer;
-    font-size: 14px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 280px;
-    height: 41px;
-    margin-top: 40px;
-
-    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
-    background-color: transparent;
-    box-sizing: border-box;
-    border: none;
-
-    color: black;
-    text-decoration: unset;
-
-    @include desktop {
-      width: 345px;
-      height: 57px;
-      border: 2px solid $orangeDark;
-
-      margin-top: 80px;
-    }
-
-    &:hover {
-      background-color: $orangeDark;
-      color: $white;
-    }
+  &:hover {
+    border: 1px solid $borderGray;
+    background-color: $blue;
+    color: $white;
   }
 }
 
-.catalog-item {
+.item {
   border: 1px solid rgba(231, 231, 231, 1);
   display: flex;
   flex-direction: column;
@@ -79,13 +81,13 @@
     max-width: 345px;
   }
 
-  &__container {
+  &Container {
     border-top: 1px solid rgba(231, 231, 231, 1);
     padding: 20px;
 
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 30px 30px;
+    gap: 20px;
     grid-template-areas:
       "a a"
       "b c";
@@ -98,20 +100,21 @@
     }
   }
 
-  &__title {
+  &Title {
     padding: 0;
     margin: 0;
     grid-area: a;
     max-width: 90%;
   }
 
-  &__price {
+  &Price {
     grid-area: b;
     display: flex;
     flex-direction: column;
+    // justify-content: flex-end;
     justify-content: center;
 
-    &_old {
+    &Old {
       color: rgba(158, 158, 158, 1);
       text-decoration: line-through;
       font-size: 14px;
@@ -121,7 +124,7 @@
       }
     }
 
-    &_new {
+    &New {
       font-size: 18px;
 
       @include mobile320 {
@@ -130,7 +133,7 @@
     }
   }
 
-  &__price-button {
+  &PriceButton {
     margin-top: auto;
     height: 44px;
 
@@ -145,7 +148,8 @@
     background-color: transparent;
     border: 1px solid $orangeLight;
     color: black;
-    width: 120px;
+    // width: 120px;
+    width: 135px;
     border-radius: 10px;
 
     &:hover {
@@ -155,7 +159,7 @@
     }
   }
 
-  &__button {
+  &Button {
     margin-top: auto;
     grid-area: c;
     cursor: pointer;
@@ -167,7 +171,7 @@
     border: 1px solid $orangeLight;
 
     height: 44px;
-    width: 152px;
+    width: 135px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -182,7 +186,7 @@
 
     transition: all 0.3s ease;
 
-    &_added {
+    &Added {
       border-color: $green;
 
       &:hover {
@@ -207,7 +211,7 @@
     }
   }
 
-  &__image {
+  &Image {
     width: 100%;
     height: 260px;
     display: flex;
@@ -216,11 +220,11 @@
     overflow: hidden;
 
     img {
-      max-width: 345px;
+      height: 100%;
     }
   }
 
-  &__title {
+  &Title {
     font-size: 20px;
     color: black;
     text-decoration: none;

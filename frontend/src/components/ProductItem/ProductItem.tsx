@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import cn from "classnames";
 import ImageGallery from "react-image-gallery";
 import { useLocalStorageData } from "../../hooks/useLocalStorageData";
@@ -13,7 +13,7 @@ import ShoppingCartOrangeIcon from "./../../images/shopping_cart_orange.svg";
 import { FeedbackPopup } from "../FeedbackPopup/FeedbackPopup";
 import { formatPrice } from "../../utils";
 
-import "./ProductItem.scss";
+import * as styles from "./ProductItem.module.scss";
 
 interface IProductItem {
   id: number;
@@ -63,12 +63,15 @@ export const ProductItem: React.FC<IProductItem> = ({
 
   const allImages = [{ original: image, thumbnail: image }, ...(images || [])];
 
+  // const MAX_SPEC_COLLAPSED = 6;
+  // const [specCollapsed, setSpecCollapsed] = useState(true);
+
   return (
-    <section className="product-item">
-      <div className="product-item__container">
-        <div className="product-item__content">
-          <h1 className="product-item__title">{title}</h1>
-          <div className="product-item__image">
+    <section className={styles.wrapper}>
+      <div className={styles.container}>
+        <div className={styles.content}>
+          <h1 className={styles.title}>{title}</h1>
+          <div className={styles.image}>
             {allImages && (
               <ImageGallery
                 showFullscreenButton
@@ -80,16 +83,14 @@ export const ProductItem: React.FC<IProductItem> = ({
               />
             )}
           </div>
-          <div className="product-item__action">
+          <div className={styles.action}>
             {!price && (
               <FeedbackPopup
                 title="Узнать цену"
                 subtitle="Отправьте форму и мы позвоним вам в ближайшее время"
                 renderButton={({ openModal }) => (
                   <button
-                    className={cn(
-                      "catalog-item__price catalog-item__price-button"
-                    )}
+                    className={styles.priceButton}
                     onClick={() => {
                       onClickButtonShowPrice(id);
                       openModal();
@@ -101,20 +102,18 @@ export const ProductItem: React.FC<IProductItem> = ({
               />
             )}
             {price && (
-              <div className="catalog-item__price">
+              <div className={styles.price}>
                 {last_price && (
-                  <div className="catalog-item__price_old">
+                  <div className={styles.priceOld}>
                     {formatPrice(last_price)}
                   </div>
                 )}
-                <div className="catalog-item__price_new">
-                  {formatPrice(price)}
-                </div>
+                <div className={styles.priceNew}>{formatPrice(price)}</div>
               </div>
             )}
             <button
-              className={cn("catalog-item__button", {
-                "catalog-item__button_added": isAddedElement,
+              className={cn(styles.button, {
+                [styles.buttonAdded]: isAddedElement,
               })}
               onClick={() => addToCart(id)}
             >
@@ -127,22 +126,33 @@ export const ProductItem: React.FC<IProductItem> = ({
             </button>
           </div>
           {spec && (
-            <div className="product-item__spec spec">
-              <p className="spec__title">Характеристики:</p>
-              <div className="spec__items">
-                {spec.map(({ key, value }) => (
-                  <div className="spec__item spec-item">
-                    <p className="spec-item__key">{key}:</p>
-                    <p className="spec-item__value">{value}</p>
-                  </div>
-                ))}
+            <div className={styles.spec}>
+              <p className={styles.specTitle}>Характеристики:</p>
+              <div className={styles.specItems}>
+                {spec.map(({ key, value }, index) => {
+                  // const isHidden = index > MAX_SPEC_COLLAPSED && specCollapsed;
+
+                  return (
+                    <div
+                      className={cn(styles.specItem, {
+                        // [styles.visuallyHidden]: isHidden,
+                      })}
+                    >
+                      <p className={styles.specItemKey}>{key}:</p>
+                      <p className={styles.specItemValue}>{value}</p>
+                    </div>
+                  );
+                })}
+                {/* <button onClick={() => setSpecCollapsed((prev) => !prev)}>
+                  {specCollapsed ? "Развернуть" : "Свернуть"}
+                </button> */}
               </div>
             </div>
           )}
           {description && (
-            <div className="product-item__description description">
-              <p className="description__title">Описание:</p>
-              <p className="description__text">{description}</p>
+            <div className={styles.description}>
+              <p className={styles.descriptionTitle}>Описание:</p>
+              <p className={styles.descriptionText}>{description}</p>
             </div>
           )}
         </div>

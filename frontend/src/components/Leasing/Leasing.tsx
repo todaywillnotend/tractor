@@ -5,7 +5,7 @@ import IconArrow from "./../../images/icon-arrow.svg";
 import IconMoney from "./../../images/icon-money.svg";
 import { FeedbackPopup } from "../FeedbackPopup/FeedbackPopup";
 
-import "./Leasing.scss";
+import * as styles from "./Leasing.module.scss";
 
 interface ILeasing {
   isLeasingPage?: boolean;
@@ -14,13 +14,13 @@ interface ILeasing {
 
 export const Leasing: React.FC<ILeasing> = ({ style }) => {
   return (
-    <section className="leasing" style={style}>
-      <div className="leasing__container">
-        <div className="leasing__content">
-          <div className="leasing__main">
-            <h2 className="leasing__title">лизинговое предложение</h2>
-            <p className="leasing__subtitle">Что это?</p>
-            <p className="leasing__text">
+    <section className={styles.leasing} style={style}>
+      <div className={styles.container}>
+        <div className={styles.content}>
+          <div className={styles.main}>
+            <h2 className={styles.title}>лизинговое предложение</h2>
+            <p className={styles.subtitle}>Что это?</p>
+            <p className={styles.text}>
               Лизинг сельскохозяйственной техники — это удобный и эффективный
               способ обновления парка машин без значительных единовременных
               затрат. Этот финансовый инструмент позволяет аграриям использовать
@@ -33,35 +33,35 @@ export const Leasing: React.FC<ILeasing> = ({ style }) => {
               subtitle="Отправьте форму и мы свяжемся с Вами в ближайшее время"
               message="Здравствуйте! Хочу связаться с Вами по поводу лизинг предложений"
               renderButton={({ openModal }) => (
-                <button className="leasing__button" onClick={openModal}>
+                <button className={styles.button} onClick={openModal}>
                   Узнать подробнее
                 </button>
               )}
             />
           </div>
-          <div className="leasing__features">
-            <div className="leasing__item leasing-item">
-              <img src={IconArrow} alt="" className="leasing-item__image" />
-              <p className="leasing-item__title">Современное оборудование</p>
-              <p className="leasing-item__subtitle">
+          <div className={styles.features}>
+            <div className={styles.item}>
+              <img src={IconArrow} alt="" className={styles.itemImage} />
+              <p className={styles.itemTitle}>Современное оборудование</p>
+              <p className={styles.itemSubtitle}>
                 Лизинг предоставляет возможность регулярно обновлять парк
                 техники, используя новейшие модели и технологии, что
                 способствует повышению эффективности работы.
               </p>
             </div>
-            <div className="leasing__item leasing-item">
-              <img src={IconMoney} alt="" className="leasing-item__image" />
-              <p className="leasing-item__title">Минимальные затраты</p>
-              <p className="leasing-item__subtitle">
+            <div className={styles.item}>
+              <img src={IconMoney} alt="" className={styles.itemImage} />
+              <p className={styles.itemTitle}>Минимальные затраты</p>
+              <p className={styles.itemSubtitle}>
                 Лизинг позволяет избежать крупных единовременных вложений. Вы
                 можете начать использовать необходимую технику, не тратя время и
                 значительные суммы сразу.
               </p>
             </div>
-            <div className="leasing__item leasing-item">
-              <img src={IconMoney} alt="" className="leasing-item__image" />
-              <p className="leasing-item__title">Возможность выкупа техники</p>
-              <p className="leasing-item__subtitle">
+            <div className={styles.item}>
+              <img src={IconMoney} alt="" className={styles.itemImage} />
+              <p className={styles.itemTitle}>Возможность выкупа техники</p>
+              <p className={styles.itemSubtitle}>
                 По окончании срока лизинга многие компании предлагают
                 возможность выкупа оборудования по остаточной стоимости, что
                 дает фермерам возможность стать владельцами техники.

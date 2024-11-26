@@ -1,6 +1,6 @@
 import React from "react";
 
-import "./Features.scss";
+import * as styles from "./Features.module.scss";
 import { Title } from "../Title/Title";
 
 const featuresItems: { img: string; text: string; desc: string }[] = [
@@ -28,18 +28,18 @@ const featuresItems: { img: string; text: string; desc: string }[] = [
 
 export const Features: React.FC = () => {
   return (
-    <section className="features">
-      <div className="features__container">
+    <section className={styles.features}>
+      <div className={styles.container}>
         <Title text="Лучшее предложения на рынке" />
-        <div className="features__items">
-          {featuresItems.map((item) => {
+        <div className={styles.items}>
+          {featuresItems.map((item, index) => {
             return (
-              <div className="features__item features-item">
-                <div className="features-item__image">
+              <div key={index} className={styles.item}>
+                <div className={styles.itemImage}>
                   <img src={item.img} alt={item.text} />
                 </div>
-                <p className="features-item__title">{item.text}</p>
-                <p className="features-item__subtitle">{item.desc}</p>
+                <p className={styles.itemTitle}>{item.text}</p>
+                <p className={styles.itemSubtitle}>{item.desc}</p>
               </div>
             );
           })}

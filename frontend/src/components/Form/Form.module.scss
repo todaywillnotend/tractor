@@ -1,0 +1,211 @@
+@import "src/styles/var";
+@import "src/styles/mixins";
+
+.wrapper {
+  margin-top: 80px;
+  display: flex;
+  justify-content: center;
+  min-height: 500px;
+
+  @include desktop {
+    margin-top: 120px;
+    min-height: unset;
+
+    background-image: url("/form-background.png");
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+}
+
+.container {
+  @include container;
+  justify-content: center;
+  min-height: 100%;
+
+  @include desktop {
+    min-height: unset;
+    margin-top: 100px;
+    margin-bottom: 100px;
+  }
+}
+
+.content {
+  padding: 30px 10px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  width: 100%;
+
+  position: relative;
+
+  border: 20px solid rgba($orangeLight, 0.4);
+
+  @include desktop {
+    background-color: $white;
+    box-sizing: border-box;
+    max-width: 954px;
+    width: 100%;
+    gap: 40px;
+
+    padding: 50px 0px;
+  }
+}
+
+.title {
+  font-size: 20px;
+  line-height: 24px;
+  margin: 0;
+  padding: 0;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+
+.subtitle {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 19.6px;
+
+  @include desktop {
+    display: none;
+  }
+
+  &Desktop {
+    display: none;
+
+    @include desktop {
+      display: block;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 19.6px;
+      max-width: 754px;
+    }
+  }
+}
+
+.form {
+  margin-top: 30px;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  gap: 30px;
+
+  @include desktop {
+    margin: 0;
+  }
+}
+
+.input {
+  width: 100%;
+  height: 37px;
+  border: unset;
+  border-radius: 0;
+  border-bottom: 1px solid $gray;
+
+  color: rgba(0, 0, 0, 0.5);
+  padding: 10px 20px;
+  outline: none;
+  box-sizing: border-box;
+
+  @include desktop {
+    max-width: 703px;
+  }
+
+  &Required {
+    border-bottom: 1px solid $orangeDark;
+  }
+}
+
+.buttons {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  gap: 34px;
+}
+
+.button {
+  font-size: 14px;
+  border: 2px solid $orangeDark;
+  height: 41px;
+  width: 206px;
+  background-color: $white;
+  margin: 1px;
+  border-radius: 10px;
+
+  transition: all 0.2s ease;
+
+  &:first-child {
+    border: 2px solid rgba(171, 171, 171, 1);
+  }
+
+  &:last-child {
+    box-shadow: 0px 0px 4px 0px $orangeDark;
+    border: 2px solid $orangeDark;
+    box-shadow: none;
+  }
+
+  @include desktop {
+    width: 420px;
+    height: 57px;
+  }
+
+  &:hover {
+    border: 1px solid $borderGray;
+    background-color: $blue;
+    color: $white;
+  }
+
+  &:disabled {
+    background-color: $white;
+    border: 2px solid $gray;
+    color: rgba($black, 0.3);
+  }
+}
+
+.success {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  max-width: 256px;
+
+  margin-top: auto;
+  margin-bottom: auto;
+
+  span {
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  img {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+.textarea {
+  border: none;
+  width: calc(100% - 2px);
+  height: 108px;
+  box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.3);
+  resize: none;
+
+  @include desktop {
+    height: 168px;
+  }
+}
+
+.privacy {
+  max-width: 754px;
+
+  &Link {
+    color: $orangeDark;
+  }
+}

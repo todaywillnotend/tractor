@@ -835,15 +835,22 @@ export interface ApiCatalogCatalog extends Schema.CollectionType {
     singularName: 'catalog';
     pluralName: 'catalogs';
     displayName: 'Catalog';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
     title: Attribute.String & Attribute.Required;
-    price: Attribute.Integer & Attribute.Required;
+    price: Attribute.Integer;
     last_price: Attribute.Integer;
-    image: Attribute.Media & Attribute.Required;
+    image: Attribute.Media<'images'> & Attribute.Required;
+    meta_description: Attribute.String;
+    description: Attribute.Text;
+    spec: Attribute.JSON;
+    meta_title: Attribute.String;
+    meta_keywords: Attribute.String;
+    images: Attribute.Media<'images' | 'files' | 'videos' | 'audios', true>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -917,7 +924,7 @@ export interface ApiPhotoPhoto extends Schema.SingleType {
     draftAndPublish: true;
   };
   attributes: {
-    image: Attribute.Media;
+    image: Attribute.Media<'images' | 'files' | 'videos' | 'audios', true>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

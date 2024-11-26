@@ -48,6 +48,7 @@ export type TResponseCollection<T> = {
 
 export type TDataSignle<T> = {
   data: {
+    id: number;
     attributes: T;
   };
 };

@@ -2,10 +2,10 @@ import React, { useMemo, useState } from "react";
 import { Link } from "gatsby";
 import cn from "classnames";
 
-import "./Header.scss";
+import * as styles from "./Header.module.scss";
 
 import { navigationItems } from "../../const";
-import { CART_LOCAL_STORAGE_KEY, tel, clock } from "../../const/data";
+import { CART_LOCAL_STORAGE_KEY, tel, mail } from "../../const/data";
 import { useLocalStorageData } from "../../hooks/useLocalStorageData";
 import { TItem } from "../../types";
 import { FeedbackPopup } from "../FeedbackPopup/FeedbackPopup";
@@ -25,8 +25,12 @@ export const Header: React.FC = () => {
     }
   }, []);
 
-  const toggleBurger = () => {
+  const toggleBurger = (disableScroll = false) => {
     setIsBurgerOpen((prev) => {
+      if (disableScroll) {
+        return !prev;
+      }
+
       prev
         ? (document.body.style.overflow = "unset")
         : (document.body.style.overflow = "hidden");
@@ -36,23 +40,28 @@ export const Header: React.FC = () => {
   };
 
   return (
-    <header className="header">
+    <header className={styles.header}>
       <div
-        className={cn("header__block header__top", {
-          header__top_animation: isBurgerOpen,
+        className={cn(styles.block, styles.top, {
+          [styles.topAnimation]: isBurgerOpen,
         })}
       >
-        <div className="header__address">{clock.title}</div>
-        <a className="header__phone" href={tel.href}>
+        <a className={styles.mail} href={mail.href}>
+          {mail.title}
+        </a>
+        <a className={styles.phone} href={tel.href}>
           {tel.title}
         </a>
-        <div className="feedback feedback_desktop">
+        <div className={cn(styles.feedback, styles.feedbackDesktop)}>
           <FeedbackPopup
             title="Напишите нам"
             subtitle=" "
-            className="feedback__popup"
+            className={styles.popup}
             renderButton={({ openModal }) => (
-              <button className="feedback__button" onClick={() => openModal()}>
+              <button
+                className={styles.feedbackButton}
+                onClick={() => openModal()}
+              >
                 Напишите нам
               </button>
             )}
@@ -62,7 +71,10 @@ export const Header: React.FC = () => {
             subtitle=" "
             withEmail={false}
             renderButton={({ openModal }) => (
-              <button className="feedback__button" onClick={() => openModal()}>
+              <button
+                className={styles.feedbackButton}
+                onClick={() => openModal()}
+              >
                 Обратный звонок
               </button>
             )}
@@ -70,32 +82,33 @@ export const Header: React.FC = () => {
         </div>
       </div>
       <div
-        className={cn("header__block header__main", {
-          header__main_animation: isBurgerOpen,
+        className={cn(styles.block, styles.main, {
+          [styles.mainAnimation]: isBurgerOpen,
         })}
       >
         <Link
           to="/"
-          className={cn("header__left", {
-            header__left_animation: isBurgerOpen,
+          className={cn(styles.left, {
+            [styles.leftAnimation]: isBurgerOpen,
           })}
         >
-          <div className="header__logo logo">
-            <div className="logo__image_wrapper">
-              <img src="/logo.png" alt="" className="logo__image" />
+          <div className={styles.logo}>
+            <div className={styles.logoImageWrapper}>
+              <img src="/logo.png" alt="" className={styles.logoImage} />
             </div>
           </div>
-          <div className="header__text">
-            <span className="header__title">ТракторСтрой</span>
-            <span className="header__subtitle">Продажа сельхозтехники</span>
+          <div className={styles.text}>
+            <span className={styles.title}>ТракторСтрой</span>
+            <span className={styles.subtitle}>Продажа сельхозтехники</span>
           </div>
         </Link>
-        <div className="header__middle">
-          <ul className="header__list">
-            {Object.values(navigationItems).map((item) => (
+        <div className={styles.middle}>
+          <ul className={styles.list}>
+            {Object.values(navigationItems).map((item, index) => (
               <li
-                className={cn("header__item", {
-                  header__item_active:
+                key={index}
+                className={cn(styles.item, {
+                  [styles.itemActive]:
                     currentPagePath === item.href ||
                     currentPagePath === item.href + "/",
                 })}
@@ -105,51 +118,55 @@ export const Header: React.FC = () => {
             ))}
           </ul>
         </div>
-        <div className="header__right">
+        <div className={styles.right}>
           <Link
             to="/cart"
-            className={cn("header__shopping-cart shopping-cart", {
-              "shopping-cart_animation": isBurgerOpen,
+            className={cn(styles.shoppingCart, {
+              [styles.shoppingCartAnimation]: isBurgerOpen,
             })}
           >
-            <img src={ShoppingCart} alt="" className="shopping-cart__image" />
-            <div className="shopping-cart__desktop">
+            <img
+              src={ShoppingCart}
+              alt=""
+              className={styles.shoppingCartImage}
+            />
+            <div className={styles.shoppingCartDesktop}>
               <img src={ShoppingCartDesktop} alt="" />
-              <span className="shopping-cart__text">Корзина</span>
+              <span className={styles.shoppingCartText}>Корзина</span>
             </div>
-            <div className="shopping-cart__count">
+            <div className={styles.shoppingCartCount}>
               {cart.length < 10 ? cart.length : "..."}
             </div>
           </Link>
           <button
-            onClick={toggleBurger}
-            className={cn("header__burger burger", {
-              burger_active: isBurgerOpen,
+            onClick={() => toggleBurger()}
+            className={cn(styles.burger, {
+              [styles.burgerActive]: isBurgerOpen,
             })}
           >
-            <div className="burger__content">
-              <div className="burger__line" />
-              <div className="burger__line" />
-              <div className="burger__line" />
+            <div className={styles.burgerContent}>
+              <div className={styles.burgerLine} />
+              <div className={styles.burgerLine} />
+              <div className={styles.burgerLine} />
             </div>
           </button>
         </div>
       </div>
       <div
-        className={cn("header__bottom", {
-          header__bottom_animation: isBurgerOpen,
+        className={cn(styles.bottom, {
+          [styles.bottomAnimation]: isBurgerOpen,
         })}
       >
-        <div className="feedback">
+        <div className={styles.feedback}>
           <FeedbackPopup
             title="Напишите нам"
             subtitle=" "
-            className="feedback__popup"
+            className={styles.feedbackPopup}
             renderButton={({ openModal }) => (
               <button
-                className="feedback__button"
+                className={styles.feedbackButton}
                 onClick={() => {
-                  toggleBurger();
+                  toggleBurger(true);
                   openModal();
                 }}
               >
@@ -161,12 +178,12 @@ export const Header: React.FC = () => {
             title="Обратный звонок"
             subtitle=" "
             withEmail={false}
-            className="feedback__popup"
+            className={styles.feedbackPopup}
             renderButton={({ openModal }) => (
               <button
-                className="feedback__button"
+                className={styles.feedbackButton}
                 onClick={() => {
-                  toggleBurger();
+                  toggleBurger(true);
                   openModal();
                 }}
               >
@@ -175,11 +192,11 @@ export const Header: React.FC = () => {
             )}
           />
         </div>
-        <ul className="header__list">
+        <ul className={styles.list}>
           {Object.values(navigationItems).map((item) => (
             <li
-              className={cn("header__item", {
-                header__item_active:
+              className={cn(styles.item, {
+                [styles.itemActive]:
                   currentPagePath === item.href ||
                   currentPagePath === item.href + "/",
               })}

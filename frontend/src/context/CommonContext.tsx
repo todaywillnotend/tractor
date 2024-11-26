@@ -2,6 +2,7 @@ import React, { PropsWithChildren, useEffect, useMemo, useState } from "react";
 import { TItem, TPhoto } from "../types";
 import { getCatalogItems, getPhotos } from "../api";
 import CookieConsent from "react-cookie-consent";
+import { YMInitializer } from "react-yandex-metrika";
 
 interface IContextValue {
   state: {
@@ -70,6 +71,7 @@ const CommonContextProvider = (props: PropsWithChildren) => {
 const commonElementWrapper = (element: React.ReactElement) => {
   return (
     <>
+      <YMInitializer accounts={[97789513]} options={{ webvisor: true }} />
       <CommonContextProvider>{element}</CommonContextProvider>
       <CookieConsent buttonText="Принять">
         Мы используем файлы cookie. Продолжив работу с сайтом, вы подтверждаете,

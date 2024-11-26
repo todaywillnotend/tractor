@@ -12,6 +12,7 @@
     "build:production": "NODE_ENV=production docker-compose -f docker-compose.prod.yml up -d --no-deps --build",
     "develop": "NODE_ENV=development docker-compose -f docker-compose.dev.yml up -d",
     "production": "NODE_ENV=production docker-compose -f docker-compose.prod.yml up --force-recreate --build -d && docker-compose -f docker-compose.prod.yml logs && docker image prune -f",
+    "stop:develop": "docker-compose -f docker-compose.dev.yml down",
     "stop:production": "docker-compose -f docker-compose.prod.yml down",
     "clean:docker": "docker stop $(docker ps -qa) && docker rm $(docker ps -qa) && docker rmi -f $(docker images -qa) && docker volume rm $(docker volume ls -q) && docker network rm $(docker network ls -q)"
   }

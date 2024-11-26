@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import ym from "react-yandex-metrika";
+import cn from "classnames";
 // @ts-ignore
 import IconDone from "./../../images/icon-done.svg";
 
-import "./Form.scss";
+import * as styles from "./Form.module.scss";
 
 type TFormData = {
   name?: string;
@@ -91,6 +93,10 @@ export const Form: React.FC<IForm> = ({
 
       setIsSuccess(isOk);
       onSuccess?.();
+
+      if (isOk) {
+        ym("reachGoal", "formSended");
+      }
     } catch (error) {
       alert("Произошла какая то ошибка");
     } finally {
@@ -99,26 +105,23 @@ export const Form: React.FC<IForm> = ({
   };
 
   return (
-    <section className="form">
-      <div className="form__container">
-        <div className="form__content">
+    <section className={styles.wrapper}>
+      <div className={styles.container}>
+        <div className={styles.content}>
           {isSuccess ? (
-            <div className="form__success">
+            <div className={styles.success}>
               <img src={IconDone} alt="" />
 
               <span>{"Ваша заявка успешно отправлена"}</span>
             </div>
           ) : (
             <>
-              <h3 className="form__title">
-                {title !== undefined ? title : "Заявка"}
-              </h3>
-              <p className="form__subtitle">
-                {subtitle !== undefined
-                  ? subtitle
-                  : "Заполните форму и наш менеджер свяжется с Вами в ближайшее рабочее время."}
+              <h3 className={styles.title}>{title ?? "Заявка"}</h3>
+              <p className={styles.subtitle}>
+                {subtitle ??
+                  "Заполните форму и наш менеджер свяжется с Вами в ближайшее рабочее время."}
               </p>
-              <div className="form__subtitle_desktop">
+              <div className={styles.subtitleDesktop}>
                 {subtitle !== undefined
                   ? subtitle
                   : `Удобный способ связаться с нами это телефон, но если Вы не
@@ -126,13 +129,13 @@ export const Form: React.FC<IForm> = ({
                 формы, наш менеджер свяжется с Вами в ближайшее рабочее время.`}
               </div>
 
-              <form className="form__form" onSubmit={onSubmit}>
+              <form className={styles.form} onSubmit={onSubmit}>
                 {withEmail && (
                   <input
                     value={formData.email}
                     type="email"
                     placeholder="E-mail"
-                    className="form__input"
+                    className={styles.input}
                     onChange={(event) =>
                       setFormData((prev) => ({
                         ...prev,
@@ -145,7 +148,7 @@ export const Form: React.FC<IForm> = ({
                   value={formData.name}
                   type="text"
                   placeholder="Ваше имя"
-                  className="form__input"
+                  className={styles.input}
                   onChange={(event) =>
                     setFormData((prev) => ({
                       ...prev,
@@ -157,7 +160,7 @@ export const Form: React.FC<IForm> = ({
                   value={formData.phone}
                   type="tel"
                   placeholder="Контактный телефон"
-                  className="form__input form__input_required"
+                  className={cn(styles.input, styles.inputRequired)}
                   onChange={(event) =>
                     setFormData((prev) => ({
                       ...prev,
@@ -167,7 +170,7 @@ export const Form: React.FC<IForm> = ({
                 />
                 {withMessage && (
                   <textarea
-                    className="form__input form__textarea"
+                    className={cn(styles.input, styles.textarea)}
                     placeholder="Сообщение"
                     onChange={(event) =>
                       setFormData((prev) => ({
@@ -179,7 +182,7 @@ export const Form: React.FC<IForm> = ({
                     {formData.message}
                   </textarea>
                 )}
-                <label className="form__privacy">
+                <label className={styles.privacy}>
                   <input
                     type="checkbox"
                     checked={privacy}
@@ -187,15 +190,19 @@ export const Form: React.FC<IForm> = ({
                   />{" "}
                   Я даю согласие на обработку персональных данных в
                   соотстветствии с{" "}
-                  <a href="/privacy" className="privacy-link" target="_blank">
+                  <a
+                    href="/privacy"
+                    className={styles.privacyLink}
+                    target="_blank"
+                  >
                     Политикой&#160;конфиденциальности
                   </a>
                   .
                 </label>
-                <div className="form__buttons">
+                <div className={styles.buttons}>
                   <button
                     type="submit"
-                    className="form__button"
+                    className={styles.button}
                     disabled={!isButtonEnabled}
                   >
                     {isLoading ? "Загрузка..." : "Отправить"}

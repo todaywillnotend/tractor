@@ -1,0 +1,9 @@
+@import "src/styles/var";
+@import "src/styles/mixins";
+
+.feedback {
+  section > * {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}

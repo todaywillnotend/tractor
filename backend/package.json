@@ -10,6 +10,7 @@
   "scripts": {
     "build": "strapi build",
     "develop": "strapi develop",
+    "generate:types": "strapi ts:generate-types",
     "start": "strapi start",
     "strapi": "strapi"
   },

@@ -4,7 +4,7 @@ import { Link, navigate } from "gatsby";
 import { Title } from "../Title/Title";
 import cn from "classnames";
 
-import "./Catalog.scss";
+import * as styles from "./Catalog.module.scss";
 
 import {
   CART_LOCAL_STORAGE_KEY,
@@ -67,40 +67,30 @@ export const Catalog: React.FC<ICatalog> = ({ isCatalogPage = false }) => {
   };
 
   return (
-    <section className="catalog">
-      <div className="catalog__container">
+    <section className={styles.catalog}>
+      <div className={styles.container}>
         <Title text="каталог" />
-        <div className="catalog__items">
-          {(catalog || []).map((item, index) => {
-            if (!isCatalogPage && index > MAX_ITEMS_COUNT - 1) {
-              return null;
-            }
-
+        <div className={styles.items}>
+          {(catalog || []).map((item) => {
             const isAddedElement = cart.includes(item.id);
 
             return (
-              <div className="catalog__item catalog-item">
-                <Link
-                  to={`/catalog/${item.id}`}
-                  className="catalog-item__image"
-                >
+              <div className={styles.item} key={item.id}>
+                <Link to={`/catalog/${item.id}`} className={styles.itemImage}>
                   <img src={item.image} alt={item.title} />
                 </Link>
-                <div className="catalog-item__container">
-                  <Link
-                    to={`/catalog/${item.id}`}
-                    className="catalog-item__title"
-                  >
+                <div className={styles.itemContainer}>
+                  <Link to={`/catalog/${item.id}`} className={styles.itemTitle}>
                     {item.title}
                   </Link>
                   {item.price && (
-                    <div className="catalog-item__price">
+                    <div className={styles.itemPrice}>
                       {item.last_price && (
-                        <div className="catalog-item__price_old">
+                        <div className={styles.itemPriceOld}>
                           {formatPrice(item.last_price)}
                         </div>
                       )}
-                      <div className="catalog-item__price_new">
+                      <div className={styles.itemPriceNew}>
                         {formatPrice(item.price)}
                       </div>
                     </div>
@@ -112,7 +102,8 @@ export const Catalog: React.FC<ICatalog> = ({ isCatalogPage = false }) => {
                       renderButton={({ openModal }) => (
                         <button
                           className={cn(
-                            "catalog-item__price catalog-item__price-button"
+                            styles.itemPrice,
+                            styles.itemPriceButton
                           )}
                           onClick={() => {
                             onClickButtonShowPrice(item.id);
@@ -125,8 +116,8 @@ export const Catalog: React.FC<ICatalog> = ({ isCatalogPage = false }) => {
                     />
                   )}
                   <button
-                    className={cn("catalog-item__button", {
-                      "catalog-item__button_added": isAddedElement,
+                    className={cn(styles.itemButton, {
+                      [styles.itemButtonAdded]: isAddedElement,
                     })}
                     onClick={() => addToCart(item.id)}
                   >
@@ -147,7 +138,7 @@ export const Catalog: React.FC<ICatalog> = ({ isCatalogPage = false }) => {
           })}
         </div>
         {hasMorePage && (
-          <button className="catalog__button" onClick={onButtonClick}>
+          <button className={styles.button} onClick={onButtonClick}>
             {isCatalogPage ? "Показать еще" : "Перейти в католог"}
           </button>
         )}

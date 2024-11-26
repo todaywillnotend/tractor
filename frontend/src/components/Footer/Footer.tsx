@@ -3,15 +3,15 @@ import React from "react";
 import { tel, clock } from "../../const/data";
 import { FeedbackPopup } from "../FeedbackPopup/FeedbackPopup";
 
-import "./Footer.scss";
+import * as styles from "./Footer.module.scss";
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="footer">
-      <div className="footer__container">
-        <div className="footer__left">
-          <div className="footer__address">{clock.title}</div>
-          <a className="footer__phone" href={tel.href}>
+    <footer className={styles.footer}>
+      <div className={styles.container}>
+        <div className={styles.left}>
+          <div className={styles.address}>{clock.title}</div>
+          <a className={styles.phone} href={tel.href}>
             {tel.title}
           </a>
           {/* TODO: Удалить или исправить */}
@@ -20,15 +20,15 @@ export const Footer: React.FC = () => {
             ремонта Капремонт Т-150
           </div> */}
         </div>
-        <div className="footer__right">
-          <div className="feedback feedback_desktop">
+        <div className={styles.right}>
+          <div className={styles.feedback}>
             <FeedbackPopup
               title="Напишите нам"
               subtitle=" "
-              className="feedback__popup"
+              className={styles.feedbackPopup}
               renderButton={({ openModal }) => (
                 <button
-                  className="feedback__button"
+                  className={styles.feedbackButton}
                   onClick={() => openModal()}
                 >
                   Напишите нам
@@ -41,7 +41,7 @@ export const Footer: React.FC = () => {
               withEmail={false}
               renderButton={({ openModal }) => (
                 <button
-                  className="feedback__button"
+                  className={styles.feedbackButton}
                   onClick={() => openModal()}
                 >
                   Обратный звонок

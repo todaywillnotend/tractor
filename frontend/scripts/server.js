@@ -31,7 +31,10 @@ const rebuild = () => {
     console.log(`Gatsby rebuild finished with exit code ${code}`);
     isBuilding = false;
     if (code === 0) {
-      // replace old build with new one only if process exited without errors (code 0)
+      // Очистка старого билда
+      fs.emptyDirSync(serverFolder);
+
+      // Копирование новой сборки
       fs.copySync(buildFolder, serverFolder);
     }
   });

@@ -1,0 +1,95 @@
+@import "src/styles/var";
+@import "src/styles/mixins";
+
+.privacy {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+
+  h2,
+  h3,
+  h4 {
+    font-weight: 300;
+  }
+
+  strong {
+    font-weight: 600;
+  }
+}
+
+.container {
+  @include container;
+}
+
+.col {
+  position: relative;
+  width: 100%;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+  -ms-flex-preferred-size: 0;
+  -webkit-flex-basis: 0;
+  flex-basis: 0;
+  -ms-flex-positive: 1;
+  -webkit-flex-grow: 1;
+  flex-grow: 1;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.mb4 {
+  margin-bottom: 24px !important;
+}
+
+.row {
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.descr,
+h5 {
+  margin-bottom: 24px;
+}
+
+.ol {
+  margin-bottom: 16px;
+  padding-left: 28px;
+  overflow-y: auto;
+
+  @include tablet {
+    padding-left: 40px;
+  }
+}
+
+.purposeTable {
+  border-collapse: collapse;
+  margin-bottom: 24px;
+}
+
+.purposeTable,
+.purposeTable th,
+.purposeTable td {
+  border: 1px solid #d8d8d8;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.purposeTable,
+.purposeTable th,
+.purposeTable td {
+  border: 1px solid #d8d8d8;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.purposeTable th,
+.purposeTable td {
+  vertical-align: top;
+  padding: 0.5em 0.75em;
+}
