@@ -1,4 +1,6 @@
+import React from "react";
 import { GatsbyBrowser } from "gatsby";
+import ym, { YMInitializer } from "react-yandex-metrika";
 
 import "./src/styles/global.scss";
 

@@ -25,9 +25,10 @@ export const FeedbackPopup: React.FC<IFeedbackPopup> = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const [showPriceId, _setShowPriceId] = useLocalStorageData<
-    number | undefined
-  >(SHOW_PRICE_LOCAL_STORAGE_KEY, undefined);
+  const [showPriceId, setShowPriceId] = useLocalStorageData<number | undefined>(
+    SHOW_PRICE_LOCAL_STORAGE_KEY,
+    undefined
+  );
 
   return (
     <ModalWindow
@@ -44,6 +45,7 @@ export const FeedbackPopup: React.FC<IFeedbackPopup> = ({
           subtitle={subtitle}
           withMessage
           cart={showPriceId ? [showPriceId] : []}
+          onSuccess={() => setShowPriceId(undefined)}
         />
       </div>
     </ModalWindow>

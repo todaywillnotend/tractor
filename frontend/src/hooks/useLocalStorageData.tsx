@@ -48,7 +48,11 @@ export function useLocalStorageData<T>(
   }, [key, initialData]);
 
   const setLocalStorageData = (value: T) => {
-    localStorage.setItem(key, JSON.stringify(value));
+    if (!value) {
+      localStorage.removeItem(key);
+    } else {
+      localStorage.setItem(key, JSON.stringify(value));
+    }
 
     const event = new CustomEvent(eventName, {
       detail: {

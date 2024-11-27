@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import ym from "react-yandex-metrika";
 import cn from "classnames";
 // @ts-ignore
 import IconDone from "./../../images/icon-done.svg";
@@ -95,7 +94,7 @@ export const Form: React.FC<IForm> = ({
       onSuccess?.();
 
       if (isOk) {
-        ym("reachGoal", "formSended");
+        window.ym(97789513, "reachGoal", "formSended");
       }
     } catch (error) {
       alert("Произошла какая то ошибка");
@@ -186,7 +185,7 @@ export const Form: React.FC<IForm> = ({
                   <input
                     type="checkbox"
                     checked={privacy}
-                    onClick={() => setPrivacy((prev) => !prev)}
+                    onChange={() => setPrivacy((prev) => !prev)}
                   />{" "}
                   Я даю согласие на обработку персональных данных в
                   соотстветствии с{" "}

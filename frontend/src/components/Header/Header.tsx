@@ -193,8 +193,9 @@ export const Header: React.FC = () => {
           />
         </div>
         <ul className={styles.list}>
-          {Object.values(navigationItems).map((item) => (
+          {Object.values(navigationItems).map((item, index) => (
             <li
+              key={index}
               className={cn(styles.item, {
                 [styles.itemActive]:
                   currentPagePath === item.href ||
