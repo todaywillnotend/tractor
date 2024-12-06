@@ -8,12 +8,11 @@ import * as styles from "./Catalog.module.scss";
 
 import {
   CART_LOCAL_STORAGE_KEY,
-  MAX_ITEMS_COUNT,
   navigationItems,
   SHOW_PRICE_LOCAL_STORAGE_KEY,
 } from "../../const";
 import { CommonContext } from "../../context/CommonContext";
-import { formatPrice } from "../../utils";
+import { formatPrice, getRandomElements } from "../../utils";
 import { useLocalStorageData } from "../../hooks/useLocalStorageData";
 // @ts-ignore
 import IconDone from "./../../images/icon-done.svg";
@@ -23,9 +22,15 @@ import { FeedbackPopup } from "../FeedbackPopup/FeedbackPopup";
 
 interface ICatalog {
   isCatalogPage?: boolean;
+  title?: string;
+  maxItems?: number;
 }
 
-export const Catalog: React.FC<ICatalog> = ({ isCatalogPage = false }) => {
+export const Catalog: React.FC<ICatalog> = ({
+  isCatalogPage = false,
+  title = "Каталог",
+  maxItems,
+}) => {
   const catalog = useContext(CommonContext)?.state?.catalog || [];
   const hasMorePage =
     useContext(CommonContext)?.state?.hasMorePageForCatalogItems;
@@ -66,12 +71,15 @@ export const Catalog: React.FC<ICatalog> = ({ isCatalogPage = false }) => {
     }
   };
 
+  const newCatalog =
+    maxItems && catalog.length && getRandomElements(catalog, maxItems);
+
   return (
     <section className={styles.catalog}>
       <div className={styles.container}>
-        <Title text="каталог" />
+        <Title text={title} />
         <div className={styles.items}>
-          {(catalog || []).map((item) => {
+          {(newCatalog || catalog || []).map((item) => {
             const isAddedElement = cart.includes(item.id);
 
             return (

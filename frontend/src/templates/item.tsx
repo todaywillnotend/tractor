@@ -14,6 +14,7 @@ const CatalogPage: React.FC<PageProps> = ({
     images = [],
     description,
     spec,
+    videos,
   },
 }: {
   pageContext: {
@@ -25,6 +26,7 @@ const CatalogPage: React.FC<PageProps> = ({
     images?: { original: string; thumbnail: string }[];
     description?: string;
     spec?: { key: string; value: string }[];
+    videos?: string[];
   };
 }) => {
   if (!id || !title || !image) return null;
@@ -41,6 +43,7 @@ const CatalogPage: React.FC<PageProps> = ({
         images={images}
         description={description}
         spec={spec}
+        videos={videos}
       />
       <div className="footerWrapper">
         <Footer />

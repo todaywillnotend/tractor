@@ -17,6 +17,8 @@
   margin-top: 39px;
   display: flex;
   justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .container {
@@ -28,8 +30,7 @@
 
   @include desktop {
     display: grid;
-    grid-template-columns: 1fr 50%;
-    grid-template-rows: auto;
+    grid-template-columns: 1fr 588px;
     gap: 0 50px;
     grid-template-areas:
       "a b"
@@ -114,9 +115,6 @@
 
   :global(.image-gallery-content.fullscreen) {
     :global(.image-gallery-image) {
-      // height: 100% !important;
-      // max-height: calc(100vh - 180px) !important;
-
       height: unset !important;
       width: 100%;
       max-width: unset !important;
@@ -130,14 +128,17 @@
 }
 
 .spec {
-  margin-top: 20px;
   box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
   padding: 20px;
   border-radius: 10px;
 
-  @include desktop {
-    grid-area: d;
+  &Wrapper {
     margin-top: 20px;
+
+    @include desktop {
+      grid-area: d;
+      margin-top: 20px;
+    }
   }
 
   p {
@@ -166,8 +167,15 @@
     justify-content: space-between;
     gap: 10px 50px;
 
-    border-bottom: 0.7px solid rgba(208, 208, 208, 1);
-    padding-bottom: 6px;
+    padding-top: 6px;
+
+    &:not(:first-of-type) {
+      border-top: 0.7px solid rgba(208, 208, 208, 1);
+    }
+
+    .visuallyHidden {
+      border: none;
+    }
 
     &Key {
       font-size: 12px;
@@ -180,6 +188,28 @@
 
       max-width: 55%;
       text-align: right;
+    }
+  }
+
+  &Button {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    font-weight: 500;
+    font-size: 16px;
+
+    border: unset;
+    background: unset;
+    padding: unset;
+    margin-top: 16px;
+  }
+
+  &Icon {
+    transform: rotate(180deg);
+
+    &Collapsed {
+      transform: rotate(0deg);
     }
   }
 }
@@ -287,7 +317,6 @@
 }
 
 .button {
-  margin-top: auto;
   grid-area: c;
   cursor: pointer;
 
@@ -334,6 +363,150 @@
 
     img {
       display: none;
+    }
+  }
+}
+
+.delivery {
+  margin-top: 38px;
+  background-color: $orangeLight;
+  color: $white;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+
+  p {
+    margin: 0;
+    padding: 0;
+  }
+
+  @include desktop {
+    margin-top: 60px;
+  }
+
+  &Icon {
+    display: none;
+
+    @include desktop {
+      display: block;
+    }
+  }
+
+  &Content {
+    padding-top: 40px;
+    padding-bottom: 61px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+
+    @include desktop {
+      padding-top: 60px;
+      padding-bottom: 75px;
+      gap: 30px;
+    }
+  }
+
+  &Title {
+    font-size: 20px;
+    font-weight: 500;
+
+    @include desktop {
+      font-size: 24px;
+    }
+  }
+
+  &Items {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+
+    @include desktop {
+      flex-direction: row;
+      justify-content: space-between;
+      gap: 20px;
+    }
+  }
+
+  &Item {
+    flex: 1;
+
+    display: grid;
+    grid-template-columns: 53px 1fr;
+    grid-template-rows: 17px 30px;
+    gap: 8px 12px;
+    grid-template-areas:
+      "a b"
+      "a c";
+
+    &Number {
+      grid-area: a;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 53px;
+      height: 53px;
+
+      font-size: 24px;
+      font-weight: 500;
+
+      border-radius: 60px;
+      background-color: $white;
+      color: $orangeLight;
+    }
+
+    &Title {
+      grid-area: b;
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    &Subtitle {
+      grid-area: c;
+      font-size: 12px;
+    }
+  }
+}
+
+.movies {
+  margin-top: 64px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  @include desktop {
+    margin-top: 60px;
+  }
+
+  &Title {
+    font-size: 20px;
+    font-weight: 500;
+
+    @include desktop {
+      font-size: 24px;
+    }
+  }
+
+  &Items {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+
+    @include desktop {
+      gap: 20px;
+    }
+  }
+
+  &Item {
+    max-width: 100%;
+    height: 163px;
+    border-radius: 4px;
+
+    @include desktop {
+      height: 330px;
+      max-width: 588px;
     }
   }
 }

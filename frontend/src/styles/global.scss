@@ -37,3 +37,8 @@ body {
   z-index: 100;
   background-color: transparent !important;
 }
+
+// Ставим максимальный z-index на fullscreen картинки
+.image-gallery-content.fullscreen {
+  z-index: 101;
+}

@@ -9,6 +9,7 @@ import { PhotoGallery } from "../components/PhotoGallery/PhotoGallery";
 import { Form } from "../components/Form/Form";
 import { Footer } from "../components/Footer/Footer";
 import { Leasing } from "../components/Leasing/Leasing";
+import { Repair } from "../components/Repair/Repair";
 
 const IndexPage: React.FC<PageProps> = () => {
   return (
@@ -17,6 +18,7 @@ const IndexPage: React.FC<PageProps> = () => {
       <Main />
       <Leasing />
       <Catalog />
+      <Repair />
       <Features />
       <Contacts />
       <PhotoGallery />

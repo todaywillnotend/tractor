@@ -28,25 +28,20 @@
   flex-wrap: wrap;
   justify-content: space-between;
   flex: 1;
+  gap: 20px;
 
   @include desktop {
     flex: unset;
-    gap: 40px;
+    flex-direction: column;
   }
 }
 
 .address {
-  font-size: 12px;
-  max-width: 137px;
-
-  @include desktop {
-    font-size: 12px;
-    max-width: unset;
-  }
+  font-size: 16px;
 }
 
 .phone {
-  font-size: 14px;
+  font-size: 16px;
   color: $black;
   text-decoration: unset;
 }
@@ -101,5 +96,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    text-wrap: nowrap;
   }
 }

@@ -10,6 +10,7 @@ export type TItem = {
   }[];
   description?: string;
   spec?: { key: string; value: string }[];
+  videos?: string[];
   meta_title?: string;
   meta_description?: string;
   meta_keywords?: string;
@@ -26,6 +27,7 @@ export type TItemResponse = {
   }>;
   description?: string;
   spec?: { key: string; value: string }[];
+  videos?: string[];
   meta_title?: string;
   meta_description?: string;
   meta_keywords?: string;

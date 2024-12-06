@@ -5,7 +5,7 @@ import cn from "classnames";
 import * as styles from "./Header.module.scss";
 
 import { navigationItems } from "../../const";
-import { CART_LOCAL_STORAGE_KEY, tel, mail } from "../../const/data";
+import { CART_LOCAL_STORAGE_KEY, tel, mail, whatsapp } from "../../const/data";
 import { useLocalStorageData } from "../../hooks/useLocalStorageData";
 import { TItem } from "../../types";
 import { FeedbackPopup } from "../FeedbackPopup/FeedbackPopup";
@@ -13,6 +13,8 @@ import { FeedbackPopup } from "../FeedbackPopup/FeedbackPopup";
 import ShoppingCart from "./../../images/shopping_cart.svg";
 // @ts-ignore
 import ShoppingCartDesktop from "./../../images/shopping_cart_desktop.svg";
+// @ts-ignore
+import WhatsappIcon from "./../../images/icon-whatsapp.svg";
 
 export const Header: React.FC = () => {
   const [isBurgerOpen, setIsBurgerOpen] = useState(false);
@@ -49,9 +51,15 @@ export const Header: React.FC = () => {
         <a className={styles.mail} href={mail.href}>
           {mail.title}
         </a>
-        <a className={styles.phone} href={tel.href}>
-          {tel.title}
-        </a>
+        <div className={styles.contactsGroup}>
+          <a className={styles.phone} href={tel.href}>
+            {tel.title}
+          </a>
+          <a className={styles.whatsapp} href={whatsapp.href}>
+            <img src={WhatsappIcon} alt="" className={styles.whatsappImage} />
+            {whatsapp.title}
+          </a>
+        </div>
         <div className={cn(styles.feedback, styles.feedbackDesktop)}>
           <FeedbackPopup
             title="Напишите нам"

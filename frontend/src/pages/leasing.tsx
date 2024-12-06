@@ -5,7 +5,7 @@ import { Contacts } from "../components/Contacts/Contacts";
 import { Footer } from "../components/Footer/Footer";
 import { Leasing } from "../components/Leasing/Leasing";
 
-const ContactsPage: React.FC<PageProps> = () => {
+const LeasingPage: React.FC<PageProps> = () => {
   return (
     <main className="mainWrapper">
       <Header />
@@ -18,7 +18,7 @@ const ContactsPage: React.FC<PageProps> = () => {
   );
 };
 
-export default ContactsPage;
+export default LeasingPage;
 
 export const Head: HeadFC = () => (
   <>

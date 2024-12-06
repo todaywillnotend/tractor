@@ -14,11 +14,10 @@ export const Footer: React.FC = () => {
           <a className={styles.phone} href={tel.href}>
             {tel.title}
           </a>
-          {/* TODO: Удалить или исправить */}
-          {/* <div className="footer__copyright">
-            2021-2023 © Отдел ООО “ТД ВТ” по реализации Т-150 после капитального
-            ремонта Капремонт Т-150
-          </div> */}
+          <div className="footer__copyright">
+            2021-2024 © Отдел ООО "ТД ВТ" по реализации Т-150 после капитального
+            ремонта
+          </div>
         </div>
         <div className={styles.right}>
           <div className={styles.feedback}>

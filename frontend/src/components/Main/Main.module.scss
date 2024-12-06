@@ -6,7 +6,6 @@
   margin-top: 39px;
 
   @include desktop {
-    min-height: 613px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -14,8 +13,10 @@
     background-size: contain;
     background-repeat: no-repeat;
     background-position: left;
+  }
 
-    margin-top: 79px;
+  @include designDesktop {
+    min-height: 613px;
   }
 }
 
@@ -31,7 +32,7 @@
 
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto 1fr;
+    grid-template-rows: 0.6fr 1fr;
     gap: 0px 90px;
     grid-template-areas:
       "a b"
@@ -49,8 +50,10 @@
     font-size: 32px;
     font-weight: 500;
 
-    margin-top: 128px;
     grid-area: b;
+
+    margin-top: auto;
+    margin-bottom: 20px;
   }
 }
 
@@ -62,7 +65,7 @@
 
   @include desktop {
     text-align: left;
-    font-size: 14px;
+    font-size: 16px;
   }
 }
 
@@ -93,7 +96,7 @@
 
     @include desktop {
       max-width: unset;
-      width: 763px;
+      width: 100%;
     }
   }
 }
@@ -108,7 +111,8 @@
   @include desktop {
     box-shadow: unset;
     padding: 0;
-    margin-top: 40px;
+    margin-top: auto;
+    margin-bottom: auto;
 
     grid-area: c;
   }

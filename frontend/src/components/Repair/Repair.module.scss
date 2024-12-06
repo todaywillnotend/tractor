@@ -1,0 +1,98 @@
+@import "src/styles/var";
+@import "src/styles/mixins";
+
+.repair {
+  margin-top: 77px;
+  padding-bottom: 54px;
+  display: flex;
+  justify-content: center;
+  background-color: $orangeDark;
+  min-height: 453px;
+  background-image: url("/repair-background.png");
+  background-size: 330px;
+  background-repeat: no-repeat;
+  background-position: bottom left;
+
+  @include desktop {
+    background-image: url("/repair-background-desktop.png");
+    background-size: auto 100%;
+    background-position: right -500px top;
+    margin-top: 103px;
+    padding-bottom: 76px;
+  }
+
+  @include designDesktop {
+    background-position: right -332px top;
+  }
+}
+
+.container {
+  @include container;
+  flex-direction: column;
+  align-items: center;
+
+  @include desktop {
+    align-items: unset;
+  }
+}
+
+.title {
+  color: white;
+  margin: 0;
+  margin-top: 40px;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-style: italic;
+  font-size: 20px;
+
+  @include desktop {
+    margin-top: 100px;
+    font-size: 40px;
+  }
+}
+
+.text {
+  color: white;
+  margin: 0;
+  margin-top: 16px;
+  font-size: 12px;
+  line-height: 20px;
+
+  @include desktop {
+    margin-top: 20px;
+    font-size: 24px;
+    line-height: 24px;
+
+    max-width: 60%;
+  }
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: unset;
+  margin-top: 24px;
+  transition: all 0.2s;
+  height: 41px;
+  width: 100%;
+  font-size: 14px;
+
+  border-radius: 23px;
+  background-color: white;
+  border: 1px solid white;
+  color: $orangeLight;
+
+  &:hover {
+    border: 1px solid $borderGray;
+    background-color: $blue;
+    color: $white;
+  }
+
+  @include desktop {
+    margin-top: 32px;
+    height: 57px;
+    width: 223px;
+    font-size: 17px;
+  }
+}

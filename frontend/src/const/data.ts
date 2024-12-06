@@ -1,9 +1,11 @@
+import { text } from "stream/consumers";
+
 export const tel = {
   text: "Телефон",
   href: "tel:+79093801616",
   icon: "/icon-phone.svg",
   title: "+7 909 380-16-16",
-  subtitle: "",
+  subtitle: "Отдел ООО “ТД ВТ” по реализации Т-150 после капитального ремонта",
 };
 
 export const mail = {
@@ -28,6 +30,12 @@ export const clock = {
   href: "#",
   title: "г. Волжский, улица имени Ф.Г. Логинова, 187",
   subtitle: "Волжский",
+};
+
+export const whatsapp = {
+  title: "WhatsApp",
+  icon: "/icon-whatsapp.svg",
+  href: "https://wa.me/79093801616",
 };
 
 export const CART_LOCAL_STORAGE_KEY = "cartLocalStorageKey";

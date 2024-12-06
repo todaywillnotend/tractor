@@ -1,28 +1,31 @@
 import * as React from "react";
-import { Link, HeadFC, PageProps } from "gatsby";
+import { navigate, type HeadFC, type PageProps } from "gatsby";
+import { Header } from "../components/Header/Header";
+import { Footer } from "../components/Footer/Footer";
 
 const NotFoundPage: React.FC<PageProps> = () => {
+  React.useEffect(() => {
+    const timeout = setTimeout(() => {
+      navigate("/"); // Перенаправляем на главную страницу через 5 секунд
+    }, 5000);
+
+    return () => clearTimeout(timeout); // Очищаем таймер при размонтировании
+  }, []);
+
   return (
-    <main className="page404">
-      <h1 className="page_404__title">Page not found</h1>
-      <p className="page404__content">
-        Sorry 😔, we couldn’t find what you were looking for.
-        <br />
-        {process.env.NODE_ENV === "development" ? (
-          <>
-            <br />
-            Try creating a page in{" "}
-            <code className="page404__code">src/pages/</code>.
-            <br />
-          </>
-        ) : null}
-        <br />
-        <Link to="/">Go home</Link>.
-      </p>
+    <main className="mainWrapper">
+      <Header />
+      <div style={{ padding: "10px" }}>
+        <p>Похоже тут ничего нет)</p>
+        <p>Через 5 секунд вернем Вас на главную</p>
+      </div>
+      <div className="footerWrapper">
+        <Footer />
+      </div>
     </main>
   );
 };
 
 export default NotFoundPage;
 
-export const Head: HeadFC = () => <title>ТракторСтрой - Not found</title>;
+export const Head: HeadFC = () => <title>ТракторСтрой - 404</title>;

@@ -100,6 +100,7 @@ const createPages: GatsbyNode["createPages"] = async ({ actions, graphql }) => {
           images: item?.images,
           description: item?.description,
           spec: item?.spec,
+          videos: item?.videos,
           meta_description: item?.meta_description,
           meta_title: item?.meta_title,
           meta_keywords: item?.meta_keywords,

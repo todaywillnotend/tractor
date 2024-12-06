@@ -136,8 +136,12 @@
     border: none;
 
     @include desktop {
-      width: 707px;
+      width: 450px;
       height: 638px;
+    }
+
+    @include designDesktop {
+      width: 707px;
     }
   }
 }
