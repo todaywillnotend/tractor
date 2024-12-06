@@ -54,6 +54,11 @@ app.post("/__rebuild", (req, res) => {
 
 app.use(express.static(serverFolder));
 
+app.use((req, res) => {
+  console.error(`404 - Not Found: ${req.originalUrl}`);
+  res.status(404).sendFile(`${serverFolder}/404.html`, { root: "." });
+});
+
 app.listen(3000, () => {
   console.log("Server is running on port 3000");
 });

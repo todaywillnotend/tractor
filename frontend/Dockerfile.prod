@@ -16,7 +16,7 @@ RUN apk add --no-cache python3 make g++ && apk add vips-dev fftw-dev --update-ca
 
 RUN yarn config set network-timeout 1000000 -g 
 # Install nodejs local packages
-RUN yarn install --production --frozen-lockfile
+RUN yarn install --production
 
 # Install PM2 globally as node progress manager to start and monitor an express server
 RUN yarn global add pm2
